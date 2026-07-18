@@ -1,15 +1,816 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Money Sentinel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Money Sentinel | Your finances, reviewed daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Loop Design System structure — color tokens remapped to Ramp palette (ramp-design-md) */
+  /* brand = Ramp "smolder" scale */
+  --brand-25:#ebf1ef; --brand-50:#dce7e3; --brand-100:#c0d3cc; --brand-200:#9ab8ad; --brand-300:#6d9488;
+  --brand-400:#41705f; --brand-500:#17332d; --brand-600:#122a25; --brand-700:#0e211d; --brand-800:#0a1815; --brand-900:#060f0d;
+  /* Ramp accents */
+  --solar:#e4f222; --solar-light:#f5ff78; --black:#1a1919; --ink:#212121; --btn-dark:#2b2e35;
+  --blaze:#e96516; --spring:#5683d2; --spring-light:#e4ebf6; --midnight:#001b4a;
+  /* success = Ramp gpc green #38a169 */
+  --success-25:#f3faf6; --success-50:#e6f6ee; --success-100:#c8ead8; --success-200:#9dd8ba;
+  --success-400:#48b27c; --success-500:#38a169; --success-600:#2f855a; --success-700:#276749; --success-800:#22543d;
+  /* gray = Ramp warm neutrals (grayLight/grayMedium/grayDark, text-primary #0c0a08) */
+  --gray-25:#fbfaf9; --gray-50:#f4f2f0; --gray-100:#eae7e4; --gray-200:#d2cecb; --gray-300:#b9b4b0;
+  --gray-400:#8f8a87; --gray-500:#6e6a68; --gray-600:#55524f; --gray-700:#3d3a38; --gray-800:#212121; --gray-900:#0c0a08;
+  /* error = Ramp gpc red #e53e3e */
+  --error-25:#fdf4f4; --error-50:#fceaea; --error-100:#f9d4d4; --error-200:#f7c2c2;
+  --error-400:#ec6a6a; --error-500:#e53e3e; --error-600:#d32f2f; --error-700:#b32424; --error-800:#932020;
+  /* warn = Ramp "blaze" scale */
+  --warn-25:#fdf6f0; --warn-50:#fceee3; --warn-100:#f9d8bd; --warn-200:#f5bd92;
+  --warn-400:#ee8a44; --warn-500:#e96516; --warn-600:#c95410; --warn-700:#a4430c; --warn-800:#7d330a;
+  /* blue = Ramp "spring" scale */
+  --blue-25:#f4f7fc; --blue-50:#e4ebf6; --blue-100:#c3d3ef; --blue-200:#a3bce4; --blue-300:#8fadde;
+  --blue-400:#6f96d8; --blue-500:#5683d2; --blue-600:#3f68b4; --blue-700:#33529b;
+  --shadow-overlay:0 0 0 1px rgba(0,0,0,.06),0 12px 16px -4px rgba(0,0,0,.08),0 4px 6px -2px rgba(0,0,0,.03);
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --rail:268px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:"DM Sans",sans-serif;color:var(--gray-900);background:var(--gray-50);font-size:15px;line-height:1.5}
+.hidden{display:none!important}
+a{color:var(--brand-500)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+::placeholder{color:var(--gray-400)}
+
+/* ---------- app shell (Loop DS) ---------- */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--rail);background:var(--gray-25);border-right:1px solid var(--gray-200);display:flex;flex-direction:column;padding:26px 16px 18px;z-index:40;overflow-y:auto}
+.logo{display:inline-flex;align-items:center;gap:9px;margin:0 8px 30px;text-decoration:none;color:var(--gray-900)}
+.logo .mark{width:26px;height:26px;border-radius:8px;background:var(--brand-500);display:inline-flex;align-items:center;justify-content:center}
+.logo .mark span{width:10px;height:10px;border-radius:50%;background:var(--solar)}
+.logo .word{font-size:16.5px;font-weight:700;letter-spacing:-.3px}
+.logo .word em{font-style:normal;color:var(--gray-500);font-weight:500}
+.step-meta{font-size:11px;font-weight:700;letter-spacing:.09em;color:var(--gray-500);text-transform:uppercase;margin:0 12px 10px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:8px;font-size:14px;color:var(--gray-600);background:none;border:none;text-align:left;width:100%}
+.nav-item:hover{background:var(--gray-100)}
+.nav-item.active{background:var(--brand-25);color:var(--brand-700);font-weight:600}
+.nav-item svg{flex:0 0 17px;opacity:.85}
+.nav-item .cnt{margin-left:auto;background:var(--solar);color:var(--ink);font-size:11px;font-weight:700;border-radius:999px;min-width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.side-spacer{flex:1}
+.agent-pill{display:flex;align-items:center;gap:9px;margin:0 0 10px;padding:11px 12px;border:1px solid var(--brand-100);border-radius:10px;background:var(--brand-25);font-size:12.5px;font-weight:600;color:var(--brand-700)}
+.agent-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--success-500);box-shadow:0 0 0 3px var(--success-100);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px var(--success-50)}}
+.userbox{border-top:1px solid var(--gray-200);margin-top:8px;padding:14px 12px 0}
+.userbox .em{font-size:12.5px;color:var(--gray-600);word-break:break-all;margin-bottom:6px}
+.userbox .sub{font-size:12px;color:var(--gray-400)}
+
+main{margin-left:var(--rail);padding:56px 48px 120px;display:flex;justify-content:center}
+.col{width:100%;max-width:820px}
+h1.page-h{font-size:34px;font-weight:500;letter-spacing:-.8px;margin-bottom:8px}
+.page-sub{color:var(--gray-600);font-size:15.5px;margin-bottom:8px;max-width:620px}
+.pagebody{margin-top:30px}
+.pagebody h2{font-size:19px;font-weight:600;letter-spacing:-.2px;margin-bottom:6px}
+.desc{color:var(--gray-600);font-size:14px;margin-bottom:18px}
+
+/* ---------- cards & stats ---------- */
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.statcard{border:1px solid var(--gray-200);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);padding:18px 20px}
+.statcard .sl{font-size:12.5px;color:var(--gray-500);font-weight:600}
+.statcard .sv{font-size:24px;font-weight:600;letter-spacing:-.5px;margin-top:4px}
+.statcard .sd{font-size:12.5px;margin-top:3px;color:var(--gray-500)}
+.statcard .sd.up{color:var(--success-700);font-weight:600}
+.statcard .sd.down{color:var(--error-600);font-weight:600}
+.statcard .sd.warn{color:var(--warn-600);font-weight:600}
+.statcard.solar{background:var(--solar);border-color:var(--solar);position:relative;overflow:hidden}
+.statcard.solar .sl,.statcard.solar .sd{color:rgba(12,10,8,.65)}
+.statcard.solar .sv{color:var(--ink);font-size:28px}
+.statcard.dark{background:var(--brand-500);border-color:var(--brand-500)}
+.statcard.dark .sl{color:rgba(255,255,255,.6)}
+.statcard.dark .sv{color:#fff}
+.statcard.dark .sd{color:var(--brand-200)}
+.panel{border:1px solid var(--gray-200);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);overflow:hidden;margin-top:14px}
+.panel .p-head{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.panel .p-head h3{font-size:15px;font-weight:600;flex:1}
+.panel .p-head .see{background:none;border:none;font-size:13px;font-weight:600;color:var(--gray-600);text-decoration:underline;text-underline-offset:3px}
+.panel .p-head .see:hover{color:var(--gray-900)}
+.p-pad{padding:18px 20px}
+
+/* pills (Loop DS) */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.pill.green{background:var(--success-50);color:var(--success-800)}
+.pill.amber{background:var(--warn-50);color:var(--warn-700)}
+.pill.red{background:var(--error-50);color:var(--error-700)}
+.pill.gray{background:var(--gray-100);color:var(--gray-600)}
+.pill.blue{background:var(--blue-50);color:var(--blue-700)}
+.pill.solar{background:var(--solar);color:var(--ink)}
+
+/* buttons (Loop DS, Ramp dark primary) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 22px;border-radius:10px;font-size:14.5px;font-weight:600;border:none;transition:background .12s}
+.btn-primary{background:var(--btn-dark);color:#fff}
+.btn-primary:hover{background:var(--ink)}
+.btn-primary[disabled]{background:var(--gray-200);color:var(--gray-500);cursor:not-allowed}
+.btn-secondary{background:#fff;color:var(--gray-700);border:1px solid var(--gray-300)}
+.btn-secondary:hover{border-color:var(--gray-400);background:var(--gray-50)}
+.btn-danger{background:#fff;color:var(--error-600);border:1px solid var(--error-200)}
+.btn-danger:hover{background:var(--error-25);border-color:var(--error-400)}
+.btn-sm{height:38px;font-size:13.5px;padding:0 16px;border-radius:9px}
+.btn-solar{background:var(--solar);color:var(--ink)}
+.btn-solar:hover{background:var(--solar-light)}
+
+/* rows / lists */
+.lrow{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--gray-100)}
+.lrow:last-child{border-bottom:none}
+.lrow .av{flex:0 0 38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;color:#fff}
+.lrow .who{flex:1;min-width:0}
+.lrow .nm{font-weight:600;font-size:14.5px}
+.lrow .nm{display:block}
+.lrow .rl{display:block;font-size:12.5px;color:var(--gray-500);margin-top:1px}
+.lrow .amt{font-weight:600;font-size:14.5px;text-align:right}
+.lrow .amt .per{display:block;font-weight:400;font-size:12px;color:var(--gray-500)}
+.lrow .amt.pos{color:var(--success-700)}
+
+/* category bars */
+.cat{padding:12px 20px;border-bottom:1px solid var(--gray-100)}
+.cat:last-child{border-bottom:none}
+.cat .c-top{display:flex;align-items:baseline;gap:10px;font-size:13.5px}
+.cat .c-top .cn{font-weight:600;flex:1}
+.cat .c-top .cv{font-weight:600}
+.cat .c-top .cb{color:var(--gray-500);font-size:12.5px}
+.cat .track{height:8px;border-radius:999px;background:var(--gray-100);margin-top:8px;overflow:hidden;position:relative}
+.cat .fill{height:100%;border-radius:999px;background:var(--brand-400);transition:width .5s ease}
+.cat.over .fill{background:var(--blaze)}
+.cat .c-note{font-size:12px;margin-top:6px;color:var(--gray-500)}
+.cat.over .c-note{color:var(--warn-600);font-weight:600}
+
+/* usage bar for subscriptions */
+.use-track{width:110px;height:7px;border-radius:999px;background:var(--gray-100);overflow:hidden}
+.use-fill{height:100%;border-radius:999px}
+.use-hi{background:var(--success-500)}
+.use-mid{background:var(--warn-400)}
+.use-lo{background:var(--error-500)}
+.use-lbl{font-size:11.5px;color:var(--gray-500);margin-top:4px}
+
+/* report card */
+.report{border:1px solid var(--gray-200);border-radius:16px;background:#fff;box-shadow:var(--shadow-sm);overflow:hidden;margin-top:16px}
+.report .r-head{padding:20px 24px 14px;background:linear-gradient(135deg,var(--brand-500),var(--brand-700));color:#fff;position:relative}
+.report .r-head h3{font-size:18px;font-weight:600;letter-spacing:-.2px}
+.report .r-head .r-date{font-size:12.5px;color:var(--brand-200);margin-top:2px}
+.report .r-head .r-badge{position:absolute;top:18px;right:20px;background:var(--solar);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:4px 11px}
+.report .r-sec{padding:16px 24px;border-bottom:1px solid var(--gray-100)}
+.report .r-sec:last-child{border-bottom:none}
+.report .r-sec .r-k{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-500);margin-bottom:8px}
+.finding{display:flex;gap:11px;padding:5px 0;font-size:14px;color:var(--gray-700);line-height:1.55}
+.finding .f-ic{flex:0 0 18px;height:18px;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.finding strong{color:var(--gray-900);font-weight:600}
+.action-box{display:flex;gap:12px;background:var(--solar);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink);line-height:1.55;align-items:flex-start}
+.action-box strong{font-weight:700}
+.action-box .f-ic{flex:0 0 18px;margin-top:2px}
+.report-mini{border:1px solid var(--gray-200);border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);padding:14px 18px;margin-top:10px;display:flex;gap:14px;align-items:center}
+.report-mini .rm-date{flex:0 0 74px;font-size:12.5px;font-weight:700;color:var(--gray-500)}
+.report-mini .rm-t{flex:1;font-size:13.5px;color:var(--gray-600)}
+
+/* phone / SMS mock */
+.split{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;margin-top:16px}
+.phone{width:300px;border-radius:38px;background:var(--ink);padding:12px;box-shadow:var(--shadow-overlay);position:sticky;top:32px;margin-left:auto}
+.phone .screen{border-radius:28px;background:var(--gray-50);overflow:hidden}
+.phone .ph-top{background:#fff;border-bottom:1px solid var(--gray-100);padding:16px 14px 10px;text-align:center}
+.phone .ph-top .notch{width:86px;height:20px;background:var(--ink);border-radius:999px;margin:0 auto 10px}
+.phone .ph-top .ph-name{font-size:12.5px;font-weight:700}
+.phone .ph-top .ph-num{font-size:10.5px;color:var(--gray-500)}
+.phone .msgs{padding:14px 12px 18px;display:flex;flex-direction:column;gap:8px;min-height:340px;max-height:460px;overflow-y:auto}
+.phone .stamp{text-align:center;font-size:10px;color:var(--gray-400);font-weight:600;margin:2px 0}
+.bubble{max-width:92%;background:#fff;border:1px solid var(--gray-200);border-radius:16px 16px 16px 5px;padding:10px 12px;font-size:12px;line-height:1.5;color:var(--gray-800);white-space:pre-line;box-shadow:var(--shadow-sm)}
+.bubble.me{align-self:flex-end;background:var(--spring);border-color:var(--spring);color:#fff;border-radius:16px 16px 5px 16px}
+.bubble .b-brand{font-weight:700;color:var(--brand-500)}
+.compose{display:flex;align-items:center;gap:8px;padding:10px 12px 14px;background:#fff;border-top:1px solid var(--gray-100)}
+.compose input{flex:1;min-width:0;height:36px;border:1px solid var(--gray-200);border-radius:999px;padding:0 14px;font-size:12.5px;background:var(--gray-25);color:var(--gray-900)}
+.compose input:focus{outline:none;border-color:var(--spring);box-shadow:0 0 0 3px rgba(86,131,210,.15)}
+.compose .send{flex:0 0 30px;height:30px;border-radius:50%;background:var(--spring);color:#fff;border:none;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;line-height:1}
+.compose .send:hover{background:var(--blue-600)}
+
+/* fields / sliders / chips (Loop DS) */
+.fgrid{display:flex;flex-direction:column;gap:16px}
+.field{position:relative;display:flex;flex-direction:column;gap:7px}
+.field input,.field select{width:100%;height:48px;padding:0 16px;border:1px solid var(--gray-300);border-radius:10px;font-size:15px;color:var(--gray-900);background:#fff;appearance:none;transition:border-color .12s,box-shadow .12s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px rgba(23,51,45,.12)}
+.field label{order:-1;color:var(--gray-700);font-size:13.5px;font-weight:600;line-height:1.35}
+.sliderq{margin-top:22px}
+.q-label{font-size:14.5px;font-weight:600;margin-bottom:8px}
+.sliderq input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:var(--gray-100);outline:none;margin:10px 0 2px;cursor:pointer}
+.sliderq input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid var(--brand-500);box-shadow:0 1px 3px rgba(16,24,40,.18);cursor:grab}
+.sliderq input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid var(--brand-500);box-shadow:0 1px 3px rgba(16,24,40,.18);cursor:grab}
+.slider-read{font-size:13.5px;color:var(--gray-600);margin-top:8px}
+.slider-read strong{color:var(--gray-900);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gray-300);border-radius:999px;padding:9px 16px;font-size:13.5px;color:var(--gray-600);cursor:pointer;user-select:none;transition:all .12s;background:#fff}
+.chip.on{border-color:var(--brand-500);background:var(--brand-25);color:var(--brand-700);font-weight:600}
+
+/* toggle switch */
+.tog{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.tog .tr{width:44px;height:26px;border-radius:999px;background:var(--gray-200);position:relative;transition:background .15s;flex:0 0 44px}
+.tog .tr::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.25);transition:left .15s}
+.tog.on .tr{background:var(--brand-500)}
+.tog.on .tr::after{left:21px}
+.tog .tl{font-size:14px;font-weight:600}
+.tog .ts{font-size:12.5px;color:var(--gray-500);font-weight:400;display:block}
+
+/* goal cards */
+.goal{border:1px solid var(--gray-200);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);padding:20px 22px;margin-top:14px}
+.goal .g-top{display:flex;align-items:center;gap:12px}
+.goal .g-ic{flex:0 0 40px;height:40px;border-radius:11px;background:var(--brand-25);display:flex;align-items:center;justify-content:center;color:var(--brand-600)}
+.goal .g-name{font-weight:600;font-size:15.5px;flex:1}
+.goal .g-name .g-eta{display:block;font-size:12.5px;color:var(--gray-500);font-weight:400;margin-top:1px}
+.goal .g-amt{font-weight:600;font-size:15px;text-align:right}
+.goal .g-amt span{display:block;font-size:12px;color:var(--gray-500);font-weight:400}
+.goal .track{height:10px;border-radius:999px;background:var(--gray-100);margin-top:14px;overflow:hidden}
+.goal .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--brand-400),var(--brand-500));transition:width .5s ease}
+.goal.solar .fill{background:var(--ink)}
+
+/* connections */
+.congrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.concard{border:1px solid var(--gray-200);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);padding:16px 18px;display:flex;align-items:center;gap:13px}
+.concard .av{flex:0 0 40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff}
+.concard .who{flex:1;min-width:0}
+.concard .nm{display:block;font-weight:600;font-size:14.5px}
+.concard .rl{display:block;font-size:12px;color:var(--gray-500);margin-top:1px}
+.spinner{width:17px;height:17px;border:2.5px solid var(--gray-200);border-top-color:var(--brand-500);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.simnote{display:flex;gap:10px;border:1px solid var(--blue-100);background:var(--blue-25);border-radius:12px;padding:13px 16px;font-size:13px;color:var(--blue-700);line-height:1.55;margin-top:18px}
+
+/* transactions table */
+.tx{display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid var(--gray-100);font-size:14px}
+.tx:last-child{border-bottom:none}
+.tx .t-date{flex:0 0 58px;font-size:12px;font-weight:700;color:var(--gray-400);text-transform:uppercase}
+.tx .t-m{flex:1;font-weight:600}
+.tx .t-m .t-acct{display:block;font-size:12px;color:var(--gray-500);font-weight:400}
+.tx .t-cat{flex:0 0 auto}
+.tx .t-amt{flex:0 0 90px;text-align:right;font-weight:600}
+.tx .t-amt.pos{color:var(--success-700)}
+
+/* modal (Loop DS) */
+#modalOverlay{position:fixed;inset:0;background:rgba(12,10,8,.45);z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;border-radius:14px;box-shadow:var(--shadow-overlay);width:100%;max-width:460px;overflow:hidden}
+.modal .m-body{padding:28px 30px 24px}
+.modal h3{font-size:19px;font-weight:600;letter-spacing:-.2px;margin-bottom:10px}
+.modal p{font-size:14px;color:var(--gray-600);line-height:1.6}
+.modal .m-save{margin-top:14px;background:var(--success-25);border:1px solid var(--success-100);border-radius:10px;padding:11px 14px;font-size:13.5px;font-weight:600;color:var(--success-800)}
+.modal .m-foot{border-top:1px solid var(--gray-200);padding:15px 30px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
+
+/* toast */
+#toasts{position:fixed;bottom:22px;right:22px;z-index:99;display:flex;flex-direction:column;gap:9px}
+.toast{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:600;border-radius:11px;padding:12px 16px;box-shadow:var(--shadow-overlay);animation:tin .25s ease}
+.toast .t-dot{width:8px;height:8px;border-radius:50%;background:var(--solar)}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.subs-banner{display:flex;align-items:center;gap:12px;border:1px solid var(--success-100);background:var(--success-25);border-radius:12px;padding:14px 18px;font-size:14px;font-weight:600;color:var(--success-800);margin-top:16px}
+.canceled{opacity:.55}
+.canceled .nm{text-decoration:line-through}
+@media(max-width:1080px){.split{grid-template-columns:1fr}.phone{margin:0 auto}.statgrid{grid-template-columns:1fr 1fr}.congrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a class="logo" href="#" onclick="go('overview');return false">
+    <span class="mark"><span></span></span>
+    <span class="word">sentinel<em>.money</em></span>
+  </a>
+  <div class="step-meta">Your money</div>
+  <nav class="nav" id="nav"></nav>
+  <div class="side-spacer"></div>
+  <div class="agent-pill"><span class="dot"></span> Agent watching &middot; 5 platforms</div>
+  <div class="userbox">
+    <div class="em">alex@example.com</div>
+    <div class="sub">Daily report &middot; 8:00 AM via SMS</div>
+  </div>
+</aside>
+
+<main><div class="col" id="page"></div></main>
+
+<div id="modalOverlay" class="hidden"><div class="modal" id="modalBox"></div></div>
+<div id="toasts"></div>
+
+<script>
+/* ============ mock data ============ */
+const fmt = n => '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+const fmt2 = n => '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+const state = {
+  page:'overview',
+  smsOn:true,
+  reportTime:'8:00 AM',
+  accounts:[
+    {id:'chase',   name:'Chase Checking',        inst:'Chase',      type:'Checking',    bal:4820.12, color:'#0e3a8a', letter:'C', connected:true},
+    {id:'freedom', name:'Chase Freedom Unlimited',inst:'Chase',     type:'Credit card', bal:-1240.55,color:'#0e3a8a', letter:'C', connected:true},
+    {id:'amex',    name:'AmEx Gold',             inst:'American Express', type:'Credit card', bal:-486.20,color:'#1a6f5c', letter:'A', connected:true},
+    {id:'rh',      name:'Robinhood',             inst:'Robinhood',  type:'Brokerage',   bal:12600,   color:'#17332d', letter:'R', connected:true},
+    {id:'apple',   name:'Apple Savings',         inst:'Goldman Sachs', type:'HYSA · 4.1% APY', bal:6150, color:'#212121', letter:'', connected:true},
+  ],
+  connectable:[
+    {id:'boa',  name:'Bank of America', type:'Bank', color:'#8a1538', letter:'B', connected:false, busy:false},
+    {id:'cap1', name:'Capital One',     type:'Bank & cards', color:'#33529b', letter:'C', connected:false, busy:false},
+    {id:'venmo',name:'Venmo',           type:'Payments', color:'#5683d2', letter:'V', connected:false, busy:false},
+    {id:'fid',  name:'Fidelity',        type:'Brokerage & 401(k)', color:'#3d3a38', letter:'F', connected:false, busy:false},
+  ],
+  subs:[
+    {id:'spotify', name:'Spotify Premium', cost:11.99, renews:'Jul 22', usage:96, lastUsed:'Today',       opens:'Daily, ~2.1 hrs/day', color:'#17332d', letter:'S', active:true},
+    {id:'chatgpt', name:'ChatGPT Plus',    cost:20.00, renews:'Aug 2',  usage:88, lastUsed:'Today',       opens:'26 days this month',  color:'#41705f', letter:'C', active:true},
+    {id:'prime',   name:'Amazon Prime',    cost:14.99, renews:'Aug 9',  usage:81, lastUsed:'Yesterday',   opens:'11 orders + video',   color:'#e96516', letter:'A', active:true},
+    {id:'netflix', name:'Netflix',         cost:22.99, renews:'Jul 24', usage:74, lastUsed:'2 days ago',  opens:'14 sessions this month',color:'#932020', letter:'N', active:true},
+    {id:'notion',  name:'Notion Plus',     cost:12.00, renews:'Jul 21', usage:68, lastUsed:'Today',       opens:'Work hours, weekdays', color:'#212121', letter:'N', active:true},
+    {id:'figma',   name:'Figma Pro',       cost:15.00, renews:'Jul 30', usage:31, lastUsed:'3 weeks ago', opens:'2 sessions this month',color:'#5683d2', letter:'F', active:true},
+    {id:'crunchy', name:'Crunchyroll',     cost:7.99,  renews:'Jul 27', usage:12, lastUsed:'5 weeks ago', opens:'1 session this month', color:'#c95410', letter:'C', active:true},
+    {id:'peacock', name:'Peacock Premium', cost:7.99,  renews:'Jul 23', usage:6,  lastUsed:'47 days ago', opens:'0 sessions this month',color:'#3d3a38', letter:'P', active:true},
+  ],
+  txs:[
+    {d:'Jul 18', m:'Blue Bottle Coffee', acct:'AmEx Gold', cat:'Dining', amt:-7.75},
+    {d:'Jul 17', m:'DoorDash — Thai Basil', acct:'Chase Freedom', cat:'Dining', amt:-34.90},
+    {d:'Jul 17', m:'Whole Foods Market', acct:'Chase Freedom', cat:'Groceries', amt:-86.42},
+    {d:'Jul 16', m:'Robinhood transfer', acct:'Chase Checking', cat:'Investing', amt:-200.00},
+    {d:'Jul 16', m:'Uber', acct:'AmEx Gold', cat:'Transport', amt:-18.40},
+    {d:'Jul 15', m:'Paycheck — Acme Corp', acct:'Chase Checking', cat:'Income', amt:2140.00},
+    {d:'Jul 15', m:'Sweetgreen', acct:'AmEx Gold', cat:'Dining', amt:-16.85},
+    {d:'Jul 15', m:'Shell', acct:'Chase Freedom', cat:'Transport', amt:-42.10},
+    {d:'Jul 14', m:'DoorDash — Shake Shack', acct:'Chase Freedom', cat:'Dining', amt:-28.65},
+    {d:'Jul 14', m:'Trader Joe’s', acct:'Chase Freedom', cat:'Groceries', amt:-54.20},
+    {d:'Jul 13', m:'Rent — Parkline Apts', acct:'Chase Checking', cat:'Rent & utilities', amt:-1450.00},
+    {d:'Jul 13', m:'Cava', acct:'AmEx Gold', cat:'Dining', amt:-14.30},
+    {d:'Jul 12', m:'Target', acct:'Chase Freedom', cat:'Shopping', amt:-63.75},
+    {d:'Jul 12', m:'DoorDash — Chipotle', acct:'Chase Freedom', cat:'Dining', amt:-21.45},
+  ],
+  cats:[
+    {n:'Rent & utilities', spent:1450, budget:1500},
+    {n:'Dining',           spent:218,  budget:150},
+    {n:'Groceries',        spent:141,  budget:180},
+    {n:'Transport',        spent:61,   budget:90},
+    {n:'Shopping',         spent:64,   budget:120},
+    {n:'Investing',        spent:200,  budget:200},
+  ],
+  goals:{
+    carTarget:9000, carSaved:5400, carMonthly:450,
+    efTarget:8000, efSaved:6150,
+    diningBudget:150, subCap:120, safeTarget:500,
+  },
+  savedThisYear:0,
+  reportExtras:[],
+  thread:[], // user replies + agent responses in the SMS thread: {who:'me'|'agent', text}
+};
+
+/* ============ derived ============ */
+const activeSubs = () => state.subs.filter(s=>s.active);
+const subTotal = () => activeSubs().reduce((a,s)=>a+s.cost,0);
+const cash = () => state.accounts.filter(a=>a.bal>0 && a.type!=='Brokerage').reduce((a,b)=>a+b.bal,0);
+const cardDebt = () => -state.accounts.filter(a=>a.bal<0).reduce((a,b)=>a+b.bal,0);
+const diningSpent = 218;
+const weekSpent = () => state.cats.filter(c=>c.n!=='Rent & utilities'&&c.n!=='Investing').reduce((a,c)=>a+c.spent,0);
+function upcomingRenewals(){ return activeSubs().filter(s=>['Jul 21','Jul 22','Jul 23','Jul 24'].includes(s.renews)); }
+function safeToSpend(){
+  const overage = Math.max(0, diningSpent - state.goals.diningBudget);
+  const renew = upcomingRenewals().reduce((a,s)=>a+s.cost,0);
+  return Math.max(0, Math.round(state.goals.safeTarget - overage - renew));
+}
+function carMonthsLeft(){ return Math.ceil((state.goals.carTarget - state.goals.carSaved) / Math.max(1,state.goals.carMonthly)); }
+function carEta(){
+  const months=['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+  const m = carMonthsLeft(); const idx=(0+m)%12; const yr = 2026 + Math.floor((6+m)/12);
+  return months[idx]+' '+yr;
+}
+
+/* ============ icons ============ */
+const IC = {
+  home:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-7h6v7"/></svg>',
+  report:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>',
+  chart:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+  repeat:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
+  link:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  target:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  spark:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>',
+  up:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#276749" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+  warn:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c95410" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  cal:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#33529b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  bolt:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#0c0a08" stroke="#0c0a08" stroke-width="1" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  car:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><rect x="3" y="11" width="18" height="7" rx="2"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>',
+  shield:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  check:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#276749" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+};
+
+/* ============ nav ============ */
+const PAGES=[
+  {id:'overview', t:'Overview', ic:'home'},
+  {id:'report',   t:'Daily report', ic:'report', cnt:1},
+  {id:'spending', t:'Spending', ic:'chart'},
+  {id:'subs',     t:'Subscriptions', ic:'repeat'},
+  {id:'goals',    t:'Goals & guardrails', ic:'target'},
+  {id:'connect',  t:'Connections', ic:'link'},
+];
+function renderNav(){
+  document.getElementById('nav').innerHTML = PAGES.map(p=>
+    `<button class="nav-item ${state.page===p.id?'active':''}" onclick="go('${p.id}')">${IC[p.ic]} ${p.t}${p.cnt?`<span class="cnt">${p.cnt}</span>`:''}</button>`).join('');
+}
+function go(p){ state.page=p; location.hash=p; render(); window.scrollTo(0,0); }
+
+/* ============ shared bits ============ */
+function usageClass(u){ return u>=60?'use-hi':u>=25?'use-mid':'use-lo'; }
+function recPill(s){
+  if(!s.active) return '<span class="pill gray">Canceled</span>';
+  if(s.usage>=60) return '<span class="pill green">Keep</span>';
+  if(s.usage>=25) return '<span class="pill amber">Review</span>';
+  return '<span class="pill red">Cancel candidate</span>';
+}
+function catPill(c){
+  const map={Dining:'amber',Groceries:'green',Transport:'blue',Income:'green',Investing:'blue',Shopping:'gray','Rent & utilities':'gray'};
+  return `<span class="pill ${map[c]||'gray'}">${c}</span>`;
+}
+function toast(msg){
+  const el=document.createElement('div'); el.className='toast'; el.innerHTML=`<span class="t-dot"></span>${msg}`;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),320)},3400);
+}
+
+/* ============ SMS reply actions ============ */
+const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const flaggedSubs = () => activeSubs().filter(s => s.usage < 25 && !s.kept);
+function flagBubble(){
+  const f = flaggedSubs();
+  if(!f.length) return '';
+  const list = f.map(s => `${s.name} renews ${s.renews} at ${fmt2(s.cost)}/mo — last opened ${s.lastUsed.toLowerCase()}`).join('. ');
+  const n = f[0].name.split(' ')[0];
+  return `<div class="bubble">${list}.\nReply <strong>CANCEL ${n}</strong> to end it, or <strong>KEEP ${n}</strong> to stop asking.</div>`;
+}
+function findSub(q){
+  q = q.toLowerCase().replace(/[.!?]+$/,'').trim();
+  return state.subs.find(s => s.name.toLowerCase() === q)
+      || state.subs.find(s => s.name.toLowerCase().split(' ')[0] === q.split(' ')[0])
+      || state.subs.find(s => s.name.toLowerCase().includes(q));
+}
+function sendSms(){
+  const inp = document.getElementById('smsInput');
+  const raw = (inp?.value || '').trim();
+  if(!raw) return;
+  state.thread.push({who:'me', text:esc(raw)});
+  const m = raw.match(/^(cancel|keep)\s+(.+)/i);
+  let reply;
+  if(m){
+    const verb = m[1].toLowerCase();
+    const sub = findSub(m[2]);
+    if(!sub){
+      reply = `I couldn’t find a subscription matching “${esc(m[2].trim())}”. You have: ${activeSubs().map(s=>s.name.split(' ')[0]).join(', ')}.`;
+    } else if(verb === 'cancel'){
+      if(!sub.active){
+        reply = `${sub.name} is already canceled — access ends ${sub.renews}.`;
+      } else {
+        cancelSub(sub);
+        toast(`${sub.name} deactivated · +${fmt2(sub.cost)}/mo to car fund`);
+        reply = `Done — canceled <strong>${sub.name}</strong>, that’s ${fmt2(sub.cost)}/mo back. Routed to your car fund — new ETA <strong>${carEta()}</strong>. You keep access until ${sub.renews}.`;
+      }
+    } else {
+      sub.kept = true;
+      reply = `Got it — keeping <strong>${sub.name}</strong>. I’ll stop asking about it.`;
+    }
+  } else {
+    const f = flaggedSubs();
+    reply = `I can take action right from this thread: reply <strong>CANCEL &lt;name&gt;</strong> to end a subscription or <strong>KEEP &lt;name&gt;</strong> to stop suggestions.${f.length?` Right now I’d look at ${f.map(s=>s.name).join(' and ')}.`:''}`;
+  }
+  state.thread.push({who:'agent', text:reply});
+  render();
+  const again = document.getElementById('smsInput');
+  if(again) again.focus();
+}
+
+/* ============ SMS text generation ============ */
+function smsBody(){
+  const renew = upcomingRenewals();
+  const lines=[
+    `Good morning, Alex ☀️ Here’s your daily brief:`,
+    ``,
+    `• Dining: ${fmt(diningSpent)} this week — 43% over your ${fmt(state.goals.diningBudget)} pace`,
+    `• Robinhood: +$320 this week (NVDA, VOO)`,
+    renew.length? `• ${renew.length} renewal${renew.length>1?'s':''} before Fri: ${renew.map(s=>s.name.split(' ')[0]).join(', ')} (${fmt2(renew.reduce((a,s)=>a+s.cost,0))})` : `• No renewals before Friday`,
+    `• Car fund: ${fmt(state.goals.carSaved)} / ${fmt(state.goals.carTarget)} — on track for ${carEta()}`,
+    ``,
+    `Safe to spend before Friday: ${fmt(safeToSpend())}`,
+    `Do this: skip delivery twice this week and move $75 to your car fund.`,
+  ];
+  if(state.reportExtras.length) lines.splice(6,0,...state.reportExtras.map(e=>'• '+e.replace(/<[^>]+>/g,'')));
+  return lines.join('\n');
+}
+
+/* ============ pages ============ */
+function pageOverview(){
+  const renew=upcomingRenewals();
+  return `
+  <h1 class="page-h">Morning, Alex.</h1>
+  <p class="page-sub">Everything looks stable. One thing needs your attention: dining is pacing <strong>43% above budget</strong> this week.</p>
+
+  <div class="statgrid">
+    <div class="statcard solar"><div class="sl">Safe to spend before Friday</div><div class="sv">${fmt(safeToSpend())}</div><div class="sd">After budgets, renewals & goals</div></div>
+    <div class="statcard"><div class="sl">Total cash</div><div class="sv">${fmt(cash())}</div><div class="sd up">Across 2 accounts</div></div>
+    <div class="statcard"><div class="sl">Card balances</div><div class="sv">${fmt(cardDebt())}</div><div class="sd">Autopay Jul 28</div></div>
+    <div class="statcard"><div class="sl">Investments</div><div class="sv">${fmt(12600)}</div><div class="sd up">+$320 (2.8%) this week</div></div>
+    <div class="statcard"><div class="sl">Subscriptions</div><div class="sv">${fmt2(subTotal())}<span style="font-size:14px;color:var(--gray-500)">/mo</span></div><div class="sd ${subTotal()>state.goals.subCap?'warn':''}">${subTotal()>state.goals.subCap?'Over your '+fmt(state.goals.subCap)+' cap':'Under your '+fmt(state.goals.subCap)+' cap'}</div></div>
+    <div class="statcard dark"><div class="sl">Agent status</div><div class="sv" style="font-size:19px">Watch mode</div><div class="sd">Next report tomorrow, ${state.reportTime}</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="p-head"><h3>Today’s findings</h3><button class="see" onclick="go('report')">Open daily report</button></div>
+    <div class="p-pad" style="padding-top:12px">
+      <div class="finding"><span class="f-ic">${IC.warn}</span><span><strong>Dining is your only red flag.</strong> ${fmt(diningSpent)} this week vs a ${fmt(state.goals.diningBudget)} budget — mostly DoorDash (3 orders).</span></div>
+      <div class="finding"><span class="f-ic">${IC.up}</span><span><strong>Portfolio up $320 this week,</strong> driven by NVDA and VOO. AI exposure is 41% — above your 30% guardrail.</span></div>
+      <div class="finding"><span class="f-ic">${IC.cal}</span><span><strong>${renew.length} subscription${renew.length!==1?'s':''} renew${renew.length===1?'s':''} before Friday</strong>${renew.length?': '+renew.map(s=>s.name).join(', ')+'.':'.'} ${state.subs.find(s=>s.id==='peacock'&&s.active)?'Peacock hasn’t been opened in 47 days.':''}</span></div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:14px">
+    <div class="panel" style="margin-top:0">
+      <div class="p-head"><h3>Spending this week</h3><button class="see" onclick="go('spending')">Details</button></div>
+      ${state.cats.filter(c=>['Dining','Groceries','Transport','Shopping'].includes(c.n)).map(catBar).join('')}
+    </div>
+    <div class="panel" style="margin-top:0">
+      <div class="p-head"><h3>Long-term goals</h3><button class="see" onclick="go('goals')">Adjust</button></div>
+      <div class="p-pad">
+        ${goalMini('Car down payment', state.goals.carSaved, state.goals.carTarget, 'On track for '+carEta())}
+        ${goalMini('Emergency fund', state.goals.efSaved, state.goals.efTarget, fmt(state.goals.efTarget-state.goals.efSaved)+' to go')}
+      </div>
+    </div>
+  </div>`;
+}
+function goalMini(name,saved,target,eta){
+  const pct=Math.min(100,Math.round(saved/target*100));
+  return `<div style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;font-size:13.5px"><strong>${name}</strong><span style="color:var(--gray-500)">${fmt(saved)} / ${fmt(target)}</span></div>
+    <div class="goal" style="all:unset"><div class="track" style="height:8px;border-radius:999px;background:var(--gray-100);margin-top:8px;overflow:hidden"><div class="fill" style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--brand-400),var(--brand-500));border-radius:999px"></div></div></div>
+    <div style="font-size:12px;color:var(--gray-500);margin-top:5px">${pct}% · ${eta}</div>
+  </div>`;
+}
+function catBar(c){
+  const pct=Math.min(100,Math.round(c.spent/c.budget*100));
+  const over=c.spent>c.budget;
+  return `<div class="cat ${over?'over':''}">
+    <div class="c-top"><span class="cn">${c.n}</span><span class="cv">${fmt(c.spent)}</span><span class="cb">/ ${fmt(c.budget)}</span></div>
+    <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+    <div class="c-note">${over? fmt(c.spent-c.budget)+' over budget' : fmt(c.budget-c.spent)+' left this week'}</div>
+  </div>`;
+}
+
+function pageReport(){
+  const renew=upcomingRenewals();
+  return `
+  <h1 class="page-h">Daily report</h1>
+  <p class="page-sub">Sentinel reviews all five connected platforms every morning and texts you what changed, what matters, and what to do next.</p>
+
+  <div class="split">
+    <div>
+      <div class="report">
+        <div class="r-head">
+          <h3>Friday check-in</h3>
+          <div class="r-date">July 18, 2026 · delivered ${state.reportTime} ${state.smsOn?'via SMS + in-app':'in-app'}</div>
+          <span class="r-badge">Today</span>
+        </div>
+        <div class="r-sec">
+          <div class="r-k">Since yesterday</div>
+          <div class="finding"><span class="f-ic">${IC.warn}</span><span>You spent <strong>$218 on dining this week, 43% above</strong> your normal pace. Three of five charges were DoorDash.</span></div>
+          <div class="finding"><span class="f-ic">${IC.up}</span><span>Your Robinhood portfolio is <strong>up $320</strong>, mostly from NVDA and VOO. AI exposure is now <strong>41%</strong> — above your 30% target.</span></div>
+          <div class="finding"><span class="f-ic">${IC.cal}</span><span><strong>${renew.length} subscription${renew.length!==1?'s':''} renew before Friday</strong>${renew.length?' — '+renew.map(s=>s.name+' ('+fmt2(s.cost)+')').join(', ')+'.':'.'}</span></div>
+          ${state.reportExtras.map(e=>`<div class="finding"><span class="f-ic">${IC.check}</span><span>${e}</span></div>`).join('')}
+        </div>
+        <div class="r-sec">
+          <div class="r-k">Long-term goals</div>
+          <div class="finding"><span class="f-ic">${IC.check}</span><span><strong>Car down payment:</strong> ${fmt(state.goals.carSaved)} of ${fmt(state.goals.carTarget)} saved. At ${fmt(state.goals.carMonthly)}/mo you hit it in <strong>${carMonthsLeft()} months (${carEta()})</strong>.</span></div>
+          <div class="finding"><span class="f-ic">${IC.check}</span><span><strong>Emergency fund:</strong> ${fmt(state.goals.efSaved)} of ${fmt(state.goals.efTarget)} — ${Math.round(state.goals.efSaved/state.goals.efTarget*100)}% there, earning 4.1% APY.</span></div>
+        </div>
+        <div class="r-sec">
+          <div class="r-k">Recommended action</div>
+          <div class="action-box"><span class="f-ic">${IC.bolt}</span><span><strong>Skip delivery twice this week</strong> and move $75 to your car fund. That keeps dining inside budget and pulls your ${carEta()} goal a week closer. Safe to spend before Friday: <strong>${fmt(safeToSpend())}</strong>.</span></div>
+        </div>
+      </div>
+
+      <div class="pagebody"><h2>Earlier this week</h2></div>
+      <div class="report-mini"><span class="rm-date">Thu Jul 17</span><span class="rm-t">Groceries trending 12% under budget. Paycheck landed ($2,140). No action needed.</span><span class="pill gray">Read</span></div>
+      <div class="report-mini"><span class="rm-date">Wed Jul 16</span><span class="rm-t">Flagged Peacock: unused for 45+ days. Suggested cancellation — saves $95.88/yr.</span><span class="pill gray">Read</span></div>
+      <div class="report-mini"><span class="rm-date">Tue Jul 15</span><span class="rm-t">Rent cleared. Cash cushion healthy at 3.2× weekly spend. Portfolio +1.1%.</span><span class="pill gray">Read</span></div>
+
+      <div class="pagebody"><h2>Delivery</h2><p class="desc">Reports land every morning. Reply to the text to ask follow-ups.</p></div>
+      <div class="panel" style="margin-top:0"><div class="p-pad" style="display:flex;flex-direction:column;gap:18px">
+        <div class="tog ${state.smsOn?'on':''}" onclick="toggleSms()"><span class="tr"></span><span class="tl">Text me my daily report<span class="ts">SMS to (734) 555-0132 · also available in-app</span></span></div>
+        <div class="field" style="max-width:220px"><label>Delivery time</label>
+          <select onchange="setTime(this.value)">
+            ${['7:00 AM','8:00 AM','9:00 AM','6:00 PM'].map(t=>`<option ${t===state.reportTime?'selected':''}>${t}</option>`).join('')}
+          </select>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone"><div class="screen">
+      <div class="ph-top"><div class="notch"></div><div class="ph-name">Sentinel</div><div class="ph-num">+1 (833) 555-0199</div></div>
+      <div class="msgs" id="msgs">
+        <div class="stamp">Today ${state.reportTime}</div>
+        ${state.smsOn?`<div class="bubble">${smsBody().replace(/^Good morning/,'<span class="b-brand">sentinel.money</span>\nGood morning')}</div>
+        <div class="bubble me">how much of that is doordash?</div>
+        <div class="bubble">DoorDash is $85.00 of your $218 dining spend (3 orders). Cancelling tonight’s usual order keeps you under ${fmt(safeToSpend())} safe-to-spend. Want me to nudge you at 6pm? 👍</div>
+        ${flagBubble()}`
+        :`<div class="bubble">SMS delivery is off — your reports are waiting in the app. Toggle SMS back on anytime. You can still reply below.</div>`}
+        ${state.thread.map(m=>`<div class="bubble ${m.who==='me'?'me':''}">${m.text}</div>`).join('')}
+      </div>
+      <div class="compose">
+        <input id="smsInput" placeholder="Text message" autocomplete="off" onkeydown="if(event.key==='Enter')sendSms()">
+        <button class="send" onclick="sendSms()" aria-label="Send">&#8593;</button>
+      </div>
+    </div></div>
+  </div>`;
+}
+function toggleSms(){ state.smsOn=!state.smsOn; toast(state.smsOn?'Daily SMS reports on':'SMS off — in-app only'); render(); }
+function setTime(t){ state.reportTime=t; toast('Daily report moved to '+t); render(); }
+
+function pageSpending(){
+  return `
+  <h1 class="page-h">Spending</h1>
+  <p class="page-sub">Week of July 13–18 · ${fmt(weekSpent())} across cards and checking, against your weekly budgets.</p>
+  <div class="panel"><div class="p-head"><h3>By category</h3><span class="pill ${diningSpent>state.goals.diningBudget?'amber':'green'}">${diningSpent>state.goals.diningBudget?'1 category over':'All under budget'}</span></div>
+    ${state.cats.map(catBar).join('')}
+  </div>
+  <div class="panel"><div class="p-head"><h3>Transactions</h3><span class="pill gray">${state.txs.length} this week</span></div>
+    ${state.txs.map(t=>`<div class="tx"><span class="t-date">${t.d}</span><span class="t-m">${t.m}<span class="t-acct">${t.acct}</span></span><span class="t-cat">${catPill(t.cat)}</span><span class="t-amt ${t.amt>0?'pos':''}">${t.amt>0?'+':''}${fmt2(t.amt)}</span></div>`).join('')}
+  </div>`;
+}
+
+function pageSubs(){
+  const sorted=[...state.subs].sort((a,b)=> (b.active-a.active) || b.usage-a.usage);
+  const lowUse=activeSubs().filter(s=>s.usage<25);
+  return `
+  <h1 class="page-h">Subscriptions</h1>
+  <p class="page-sub">Detected from recurring charges across your cards, ranked by how much you actually use them. Sentinel flags anything you’re paying for but not using.</p>
+  <div class="statgrid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="statcard"><div class="sl">Active subscriptions</div><div class="sv">${activeSubs().length}</div><div class="sd">${fmt2(subTotal())}/mo · ${fmt(Math.round(subTotal()*12))}/yr</div></div>
+    <div class="statcard"><div class="sl">Monthly cap</div><div class="sv">${fmt(state.goals.subCap)}</div><div class="sd ${subTotal()>state.goals.subCap?'warn':'up'}">${subTotal()>state.goals.subCap? fmt2(subTotal()-state.goals.subCap)+' over cap':'Within cap'}</div></div>
+    <div class="statcard ${lowUse.length?'':'dark'}"><div class="sl">Low-use spend</div><div class="sv">${fmt2(lowUse.reduce((a,s)=>a+s.cost,0))}<span style="font-size:14px;color:var(--gray-500)">/mo</span></div><div class="sd ${lowUse.length?'warn':''}">${lowUse.length? lowUse.length+' cancel candidate'+(lowUse.length>1?'s':''):'Nothing wasted 🎉'}</div></div>
+  </div>
+  ${state.savedThisYear>0?`<div class="subs-banner">${IC.check} You’ve cut ${fmt2(state.savedThisYear)}/yr in unused subscriptions — redirected to your car fund.</div>`:''}
+  <div class="panel">
+    <div class="p-head"><h3>Most used → least used</h3></div>
+    ${sorted.map(s=>`
+      <div class="lrow ${s.active?'':'canceled'}">
+        <span class="av" style="background:${s.color}">${s.letter}</span>
+        <span class="who"><span class="nm">${s.name}</span><span class="rl">${s.active?`Renews ${s.renews} · Last used ${s.lastUsed} · ${s.opens}`:'Canceled — access ends '+s.renews}</span></span>
+        <span style="text-align:right">
+          <span class="use-track"><span class="use-fill ${usageClass(s.usage)}" style="display:block;width:${s.usage}%"></span></span>
+          <span class="use-lbl">${s.usage}% usage</span>
+        </span>
+        ${recPill(s)}
+        <span class="amt">${fmt2(s.cost)}<span class="per">/mo</span></span>
+        ${s.active? (s.usage<60?`<button class="btn btn-danger btn-sm" onclick="askCancel('${s.id}')">Deactivate</button>`:`<button class="btn btn-secondary btn-sm" disabled style="opacity:.45;cursor:default">In use</button>`) : `<button class="btn btn-secondary btn-sm" onclick="reactivate('${s.id}')">Undo</button>`}
+      </div>`).join('')}
+  </div>
+  <div class="simnote">${IC.spark}<span>Usage is estimated from transaction frequency, merchant session data and device signals. In production, cancellations run through each provider’s API or a concierge flow — here they’re simulated.</span></div>`;
+}
+function askCancel(id){
+  const s=state.subs.find(x=>x.id===id);
+  openModal(`
+    <div class="m-body">
+      <h3>Deactivate ${s.name}?</h3>
+      <p>You’ve used it ${s.usage<10?'zero times':'only '+s.opens.toLowerCase()} recently (last opened ${s.lastUsed.toLowerCase()}). You’ll keep access until <strong>${s.renews}</strong>, then billing stops.</p>
+      <div class="m-save">Saves ${fmt2(s.cost)}/mo — ${fmt2(s.cost*12)}/yr → auto-redirected to your car fund</div>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-secondary btn-sm" onclick="closeModal()">Keep it</button>
+      <button class="btn btn-primary btn-sm" onclick="doCancel('${id}')">Deactivate</button>
+    </div>`);
+}
+function cancelSub(s){
+  s.active=false;
+  state.savedThisYear += s.cost*12;
+  state.goals.carMonthly += Math.round(s.cost);
+  state.reportExtras.push(`You canceled <strong>${s.name}</strong> — ${fmt2(s.cost*12)}/yr redirected to your car fund. New ETA: <strong>${carEta()}</strong>.`);
+}
+function doCancel(id){
+  const s=state.subs.find(x=>x.id===id);
+  cancelSub(s);
+  closeModal();
+  toast(`${s.name} deactivated · +${fmt2(s.cost)}/mo to car fund`);
+  render();
+}
+function reactivate(id){
+  const s=state.subs.find(x=>x.id===id);
+  s.active=true;
+  state.savedThisYear=Math.max(0,state.savedThisYear-s.cost*12);
+  state.goals.carMonthly-=Math.round(s.cost);
+  state.reportExtras=state.reportExtras.filter(e=>!e.includes(s.name));
+  toast(`${s.name} reactivated`);
+  render();
+}
+
+function pageGoals(){
+  const g=state.goals;
+  const carPct=Math.min(100,Math.round(g.carSaved/g.carTarget*100));
+  const efPct=Math.min(100,Math.round(g.efSaved/g.efTarget*100));
+  return `
+  <h1 class="page-h">Goals & guardrails</h1>
+  <p class="page-sub">These are the rules the agent watches your money against. Change them and tomorrow’s report adapts.</p>
+
+  <div class="pagebody"><h2>Long-term goals</h2></div>
+  <div class="goal solar" style="background:var(--solar);border-color:var(--solar)">
+    <div class="g-top"><span class="g-ic" style="background:rgba(12,10,8,.08);color:var(--ink)">${IC.car}</span>
+      <span class="g-name" style="color:var(--ink)">Car down payment<span class="g-eta" style="color:rgba(12,10,8,.6)">At ${fmt(g.carMonthly)}/mo · ${carMonthsLeft()} months left · done ${carEta()}</span></span>
+      <span class="g-amt" style="color:var(--ink)">${fmt(g.carSaved)}<span style="color:rgba(12,10,8,.6)">of ${fmt(g.carTarget)}</span></span></div>
+    <div class="track" style="background:rgba(12,10,8,.12)"><div class="fill" style="width:${carPct}%"></div></div>
+    <div class="sliderq" style="margin-top:18px">
+      <div class="q-label" style="color:var(--ink)">Monthly contribution</div>
+      <input type="range" min="100" max="900" step="25" value="${g.carMonthly}" oninput="setCar(this.value)" style="background:rgba(12,10,8,.15)">
+      <div class="slider-read" style="color:rgba(12,10,8,.7)"><strong style="color:var(--ink)">${fmt(g.carMonthly)}/mo</strong> — hits ${fmt(g.carTarget)} by <strong style="color:var(--ink)">${carEta()}</strong></div>
+    </div>
+  </div>
+  <div class="goal">
+    <div class="g-top"><span class="g-ic">${IC.shield}</span>
+      <span class="g-name">Emergency fund<span class="g-eta">Apple Savings · 4.1% APY</span></span>
+      <span class="g-amt">${fmt(g.efSaved)}<span>of ${fmt(g.efTarget)}</span></span></div>
+    <div class="track"><div class="fill" style="width:${efPct}%"></div></div>
+    <div style="font-size:12.5px;color:var(--gray-500);margin-top:8px">${efPct}% funded · ${fmt(g.efTarget-g.efSaved)} to go</div>
+  </div>
+
+  <div class="pagebody"><h2>Weekly guardrails</h2><p class="desc">The agent alerts you the moment spending crosses these lines.</p></div>
+  <div class="panel" style="margin-top:0"><div class="p-pad">
+    <div class="sliderq" style="margin-top:0">
+      <div class="q-label">Weekly dining budget ${diningSpent>g.diningBudget?'<span class="pill amber" style="margin-left:8px">currently over</span>':'<span class="pill green" style="margin-left:8px">on track</span>'}</div>
+      <input type="range" min="75" max="400" step="25" value="${g.diningBudget}" oninput="setDining(this.value)">
+      <div class="slider-read"><strong>${fmt(g.diningBudget)}/week</strong> — you’ve spent ${fmt(diningSpent)} so far this week</div>
+    </div>
+    <div class="sliderq">
+      <div class="q-label">Monthly subscription cap ${subTotal()>g.subCap?'<span class="pill amber" style="margin-left:8px">currently over</span>':'<span class="pill green" style="margin-left:8px">on track</span>'}</div>
+      <input type="range" min="50" max="300" step="10" value="${g.subCap}" oninput="setSubCap(this.value)">
+      <div class="slider-read"><strong>${fmt(g.subCap)}/month</strong> — active subscriptions total ${fmt2(subTotal())}</div>
+    </div>
+    <div class="sliderq">
+      <div class="q-label">Weekly safe-to-spend target</div>
+      <input type="range" min="200" max="900" step="25" value="${g.safeTarget}" oninput="setSafe(this.value)">
+      <div class="slider-read"><strong>${fmt(g.safeTarget)}/week</strong> — after overages and renewals, that’s <strong>${fmt(safeToSpend())}</strong> right now</div>
+    </div>
+  </div></div>
+
+  <div class="pagebody"><h2>Portfolio guardrail</h2></div>
+  <div class="panel" style="margin-top:0"><div class="p-pad">
+    <div class="finding" style="padding:0"><span class="f-ic">${IC.warn}</span><span><strong>Max single-theme exposure: 30%.</strong> AI holdings (NVDA + related) are at <strong>41%</strong> of your portfolio. The agent will keep flagging this in your report — it never gives buy/sell advice, it just tells you when you’ve drifted from your own rule.</span></div>
+  </div></div>`;
+}
+function setCar(v){ state.goals.carMonthly=+v; render(); }
+function setDining(v){ state.goals.diningBudget=+v; render(); }
+function setSubCap(v){ state.goals.subCap=+v; render(); }
+function setSafe(v){ state.goals.safeTarget=+v; render(); }
+
+function pageConnect(){
+  return `
+  <h1 class="page-h">Connections</h1>
+  <p class="page-sub">Sentinel reads balances, transactions and holdings from every platform you link — banks, cards, brokerages, and subscription merchants.</p>
+  <div class="pagebody"><h2>Connected · ${state.accounts.length}</h2></div>
+  <div class="congrid" style="margin-top:6px">
+    ${state.accounts.map(a=>`
+      <div class="concard">
+        <span class="av" style="background:${a.color}">${a.letter||''}</span>
+        <span class="who"><span class="nm">${a.name}</span><span class="rl">${a.type} · synced 4 min ago</span></span>
+        <span class="amt" style="font-weight:600;font-size:14.5px;${a.bal<0?'':'color:var(--gray-900)'}">${a.bal<0?'−':''}${fmt(a.bal)}</span>
+      </div>`).join('')}
+  </div>
+  <div class="pagebody"><h2>Add a platform</h2><p class="desc">Link once — the agent folds it into tomorrow’s report automatically.</p></div>
+  <div class="congrid" style="margin-top:6px">
+    ${state.connectable.map(c=>`
+      <div class="concard">
+        <span class="av" style="background:${c.color}">${c.letter}</span>
+        <span class="who"><span class="nm">${c.name}</span><span class="rl">${c.type}</span></span>
+        ${c.connected? '<span class="pill green">Connected</span>'
+          : c.busy? '<span class="spinner"></span>'
+          : `<button class="btn btn-secondary btn-sm" onclick="connect('${c.id}')">Connect</button>`}
+      </div>`).join('')}
+  </div>
+  <div class="simnote">${IC.spark}<span>Demo simulates account aggregation. In production this connects through <strong>Plaid</strong> for banks and cards, brokerage APIs for investments, and subscription detection runs on the merged transaction stream.</span></div>`;
+}
+function connect(id){
+  const c=state.connectable.find(x=>x.id===id);
+  c.busy=true; render();
+  setTimeout(()=>{
+    c.busy=false; c.connected=true;
+    toast(`${c.name} connected · syncing transactions`);
+    state.reportExtras.push(`New platform linked: <strong>${c.name}</strong>. First insights land in tomorrow’s report.`);
+    render();
+  }, 1400);
+}
+
+/* ============ modal ============ */
+function openModal(html){ document.getElementById('modalBox').innerHTML=html; document.getElementById('modalOverlay').classList.remove('hidden'); }
+function closeModal(){ document.getElementById('modalOverlay').classList.add('hidden'); }
+document.getElementById('modalOverlay').addEventListener('click',e=>{ if(e.target.id==='modalOverlay') closeModal(); });
+
+/* ============ render ============ */
+const RENDER={overview:pageOverview,report:pageReport,spending:pageSpending,subs:pageSubs,goals:pageGoals,connect:pageConnect};
+function render(){
+  renderNav();
+  document.getElementById('page').innerHTML = RENDER[state.page]();
+  const msgs=document.getElementById('msgs');
+  if(msgs) msgs.scrollTop=msgs.scrollHeight;
+}
+const h=location.hash.replace('#','');
+if(RENDER[h]) state.page=h;
+render();
+</script>
+</body>
 </html>

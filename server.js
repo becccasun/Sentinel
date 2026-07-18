@@ -73,8 +73,8 @@ app.post('/api/send-sms', async (req, res) => {
   const from        = process.env.TWILIO_FROM_NUMBER
   const to          = process.env.DEMO_PHONE_NUMBER
 
-  const hasClassic = accountSid?.startsWith('AC') && authToken && from && to
-  const hasApiKey  = apiKey?.startsWith('SK') && apiSecret && accountSid?.startsWith('AC') && from && to
+  const hasClassic = accountSid && authToken && from && to
+  const hasApiKey  = apiKey?.startsWith('SK') && apiSecret && accountSid && from && to
 
   if (!hasClassic && !hasApiKey) {
     console.log('\n📱 [SIMULATED SMS]\n' + text + '\n')

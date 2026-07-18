@@ -1,0 +1,281 @@
+PRD: Personal Finance AI Agent
+Product Name
+Money Sentinel
+Alternative names: Spendwise Agent, Personal CFO, Finance Copilot, Pocket Auditor
+One-Liner
+An AI personal finance agent that tracks spending, subscriptions, banking, and investments across accounts, then provides twice-weekly check-ins with personalized feedback and actionable financial guardrails.
+Problem
+People’s financial lives are fragmented across checking accounts, credit cards, brokerages, subscriptions, and payment apps. Existing tools show dashboards, but users still have to interpret the data themselves.
+Users need an agent that can:
+notice spending patterns
+detect waste
+connect spending with investment and savings goals
+explain what changed
+recommend next actions
+check in regularly without needing to be asked
+Target User
+Young professionals, students, and early-career earners who use multiple financial platforms:
+Chase, Capital One, AmEx, Bank of America, etc.
+Robinhood or other brokerages
+subscriptions like Netflix, Spotify, Notion, Figma, ChatGPT
+food delivery, groceries, rideshare, travel, shopping
+Core Product Thesis
+Most finance apps are dashboards. This should feel like an agent watching over your financial life.
+The differentiator:
+“You don’t just track money. You get reviewed twice a week by an AI that knows your patterns, goals, subscriptions, and investments.”
+
+Feasibility In 2 Hours
+Feasible
+Build a polished Vite/React demo with:
+mocked connected accounts
+dashboard overview
+spending breakdown
+transaction feed
+subscription tracker
+investment snapshot
+AI-generated twice-weekly check-in cards
+user-adjustable goals/budgets
+recommendations based on sample data
+“agent findings” panel
+Not Feasible
+In 2 hours, do not attempt:
+real Plaid integration
+real Robinhood integration
+OAuth bank connections
+scheduled email/SMS/push notification backend
+production-grade AI memory
+secure secrets infrastructure
+real financial advice workflows
+transaction categorization model from scratch
+Best Hackathon Approach
+Use mock data but design the system as if integrations exist.
+Example:
+Connected accounts:
+- Chase Checking
+- Chase Freedom Unlimited
+- Robinhood
+- AmEx Gold
+- Spotify
+- Netflix
+- DoorDash
+Then clearly say in the pitch:
+“For the demo, we simulate account aggregation. In production, this would connect through Plaid, brokerage APIs, and subscription detection from transaction streams.”
+
+MVP Scope
+1. Dashboard
+The first screen should show the user’s financial state at a glance.
+Key cards:
+Total cash
+Credit card balance
+Spending this week
+Subscriptions this month
+Investment portfolio value
+Safe-to-spend amount
+AI risk level
+Example:
+Cash: $4,820
+Card balance: $1,240
+Investments: $12,600
+Subscriptions: $187/mo
+Safe to spend this week: $312
+Agent status: Watch mode
+2. Twice-Weekly AI Check-In
+This is the signature feature.
+The check-in should summarize:
+what changed since last check-in
+where the user overspent
+upcoming bills/subscriptions
+investment changes
+one specific action to take
+Example:
+Tuesday Check-In
+
+You spent $218 on dining this week, 43% above your normal pace.
+Your Robinhood portfolio is up $320, mostly from NVDA and VOO.
+Three subscriptions renew before Friday: Spotify, Notion, and Netflix.
+
+Recommended action:
+Pause DoorDash this week and move $75 to savings to stay on track for your August goal.
+3. Spending Dashboard
+Break down spending by category:
+groceries
+dining
+transport
+subscriptions
+shopping
+rent/utilities
+investing transfers
+Show weekly and monthly comparisons.
+Important: make this feel operational, not decorative. Users should be able to quickly see what category needs attention.
+4. Subscription Monitor
+Detect recurring charges from transaction data.
+Each subscription should show:
+merchant
+monthly cost
+renewal date
+usage/status
+AI recommendation
+Example:
+Netflix - $22.99/mo - Keep
+Spotify - $11.99/mo - Keep
+Figma - $15/mo - Review
+Peacock - $7.99/mo - Cancel candidate
+5. Investment Snapshot
+Keep this lightweight. Do not make stock recommendations.
+Show:
+portfolio value
+weekly change
+largest holdings
+concentration risk
+recent movement explanation
+Example:
+Your portfolio is up 2.8% this week.
+Most of the move came from NVDA and VOO.
+AI exposure is now 41% of your portfolio, above your 30% target.
+6. Goals And Guardrails
+Users can tailor the agent by setting:
+weekly food budget
+max subscriptions budget
+emergency fund goal
+investing goal
+max single-stock concentration
+safe-to-spend target
+This makes the AI feel personal instead of generic.
+Recommended Demo Screens
+For 2 hours, build these four screens:
+Overview
+Main dashboard with balances, spending, subscriptions, investments, and AI summary.
+
+AI Check-In
+Twice-weekly report with findings and recommended actions.
+
+Spending
+Category charts, transactions, and budget progress.
+
+Rules / Goals
+User-defined financial guardrails.
+
+AI Behavior
+The AI should not say “buy this stock” or “sell this stock.”
+It should say:
+“your portfolio is concentrated”
+“this purchase affects your goal”
+“this subscription looks unused”
+“your grocery spending is trending high”
+“you can safely spend X before Friday”
+“you are on/off track”
+Differentiators
+1. Twice-Weekly Financial Review
+Most apps wait for the user to open them. This agent proactively checks in.
+2. Whole-Life Context
+It connects spending, subscriptions, banking, and investing in one place.
+3. Financial Guardrails
+Users define rules, and the agent monitors against them.
+4. Safe-To-Spend Number
+A simple number users can act on.
+5. Agent Mode
+Position the product as an agent that watches and learns, not just a dashboard.
+Data Model For Demo
+Use local mock data:
+accounts = [
+  { name: "Chase Checking", type: "cash", balance: 4820 },
+  { name: "Chase Freedom", type: "credit", balance: -1240 },
+  { name: "Robinhood", type: "investment", balance: 12600 }
+]
+transactions = [
+  { merchant: "Whole Foods", category: "Groceries", amount: 86.42, date: "2026-07-16" },
+  { merchant: "DoorDash", category: "Dining", amount: 34.90, date: "2026-07-15" },
+  { merchant: "Netflix", category: "Subscription", amount: 22.99, recurring: true },
+  { merchant: "Robinhood Transfer", category: "Investing", amount: 200 }
+]
+goals = {
+  weeklyDiningBudget: 150,
+  monthlySubscriptionCap: 120,
+  emergencyFundTarget: 8000,
+  maxSingleStockExposure: 25
+}
+Success Metrics
+For demo:
+User understands financial state in under 10 seconds
+AI check-in produces at least 3 useful insights
+User can adjust at least 2 goals/guardrails
+App clearly shows spending, subscriptions, and investments together
+For production:
+weekly active users
+check-in open rate
+subscriptions canceled
+spending reduction by category
+savings goal progress
+user trust score
+recommendation acceptance rate
+Risks
+Data Access
+Bank and brokerage integrations require secure providers like Plaid, MX, Finicity, or direct APIs.
+Privacy
+Financial data is sensitive. The production product needs encryption, clear data controls, and minimal data exposure to AI models.
+Compliance
+Investment advice is regulated. Avoid explicit buy/sell/hold recommendations unless operating through the right legal framework.
+Notification Fatigue
+Twice-weekly check-ins should be concise and useful. Too many alerts will feel annoying.
+Recommended 2-Hour Build Plan
+0-20 min
+Create mock financial dataset: accounts, transactions, subscriptions, investments, goals.
+
+20-60 min
+Build overview dashboard and spending breakdown.
+
+60-90 min
+Build AI check-in screen with generated insights from the mock data.
+
+90-110 min
+Build goals/guardrails editor.
+
+110-120 min
+Polish UI, run build, prepare demo script.
+
+Demo Narrative
+Use this story:
+“Meet Alex. Alex uses Chase, Robinhood, several credit cards, and has too many subscriptions. Instead of making Alex inspect five apps, Money Sentinel reviews everything twice a week and explains what changed, what matters, and what to do next.”
+
+Then show:
+Dashboard: full financial picture
+Check-in: AI explains spending/investing changes
+Subscription monitor: finds waste
+Goals: user adjusts guardrails
+Updated recommendation: AI adapts
+Recommendation
+Build the MVP as a personal finance agent with check-ins and guardrails, not as a generic budgeting app.
+The best positioning is:
+An AI agent that reviews your whole financial life twice a week, catches waste, tracks goals, and tells you what to do next across spending, subscriptions, banking, and investing.
+
+That is absolutely demoable in 2 hours with mocked data, and it gives you a strong path toward a real product later.
+
+
+12:51 PM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ask for approval
+
+
+
+
+
+
+
+5.6 TerraExtra High5.5Medium
