@@ -179,11 +179,16 @@ h1.page-h{font-size:34px;font-weight:500;letter-spacing:-.8px;margin-bottom:8px}
 .phone .ph-top .notch{width:86px;height:20px;background:var(--ink);border-radius:999px;margin:0 auto 10px}
 .phone .ph-top .ph-name{font-size:12.5px;font-weight:700}
 .phone .ph-top .ph-num{font-size:10.5px;color:var(--gray-500)}
-.phone .msgs{padding:14px 12px 18px;display:flex;flex-direction:column;gap:8px;min-height:340px}
+.phone .msgs{padding:14px 12px 18px;display:flex;flex-direction:column;gap:8px;min-height:340px;max-height:460px;overflow-y:auto}
 .phone .stamp{text-align:center;font-size:10px;color:var(--gray-400);font-weight:600;margin:2px 0}
 .bubble{max-width:92%;background:#fff;border:1px solid var(--gray-200);border-radius:16px 16px 16px 5px;padding:10px 12px;font-size:12px;line-height:1.5;color:var(--gray-800);white-space:pre-line;box-shadow:var(--shadow-sm)}
 .bubble.me{align-self:flex-end;background:var(--spring);border-color:var(--spring);color:#fff;border-radius:16px 16px 5px 16px}
 .bubble .b-brand{font-weight:700;color:var(--brand-500)}
+.compose{display:flex;align-items:center;gap:8px;padding:10px 12px 14px;background:#fff;border-top:1px solid var(--gray-100)}
+.compose input{flex:1;min-width:0;height:36px;border:1px solid var(--gray-200);border-radius:999px;padding:0 14px;font-size:12.5px;background:var(--gray-25);color:var(--gray-900)}
+.compose input:focus{outline:none;border-color:var(--spring);box-shadow:0 0 0 3px rgba(86,131,210,.15)}
+.compose .send{flex:0 0 30px;height:30px;border-radius:50%;background:var(--spring);color:#fff;border:none;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;line-height:1}
+.compose .send:hover{background:var(--blue-600)}
 
 /* fields / sliders / chips (Loop DS) */
 .fgrid{display:flex;flex-direction:column;gap:16px}
@@ -351,6 +356,7 @@ const state = {
   },
   savedThisYear:0,
   reportExtras:[],
+  thread:[], // user replies + agent responses in the SMS thread: {who:'me'|'agent', text}
 };
 
 /* ============ derived ============ */
@@ -422,6 +428,56 @@ function toast(msg){
   const el=document.createElement('div'); el.className='toast'; el.innerHTML=`<span class="t-dot"></span>${msg}`;
   document.getElementById('toasts').appendChild(el);
   setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),320)},3400);
+}
+
+/* ============ SMS reply actions ============ */
+const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const flaggedSubs = () => activeSubs().filter(s => s.usage < 25 && !s.kept);
+function flagBubble(){
+  const f = flaggedSubs();
+  if(!f.length) return '';
+  const list = f.map(s => `${s.name} renews ${s.renews} at ${fmt2(s.cost)}/mo — last opened ${s.lastUsed.toLowerCase()}`).join('. ');
+  const n = f[0].name.split(' ')[0];
+  return `<div class="bubble">${list}.\nReply <strong>CANCEL ${n}</strong> to end it, or <strong>KEEP ${n}</strong> to stop asking.</div>`;
+}
+function findSub(q){
+  q = q.toLowerCase().replace(/[.!?]+$/,'').trim();
+  return state.subs.find(s => s.name.toLowerCase() === q)
+      || state.subs.find(s => s.name.toLowerCase().split(' ')[0] === q.split(' ')[0])
+      || state.subs.find(s => s.name.toLowerCase().includes(q));
+}
+function sendSms(){
+  const inp = document.getElementById('smsInput');
+  const raw = (inp?.value || '').trim();
+  if(!raw) return;
+  state.thread.push({who:'me', text:esc(raw)});
+  const m = raw.match(/^(cancel|keep)\s+(.+)/i);
+  let reply;
+  if(m){
+    const verb = m[1].toLowerCase();
+    const sub = findSub(m[2]);
+    if(!sub){
+      reply = `I couldn’t find a subscription matching “${esc(m[2].trim())}”. You have: ${activeSubs().map(s=>s.name.split(' ')[0]).join(', ')}.`;
+    } else if(verb === 'cancel'){
+      if(!sub.active){
+        reply = `${sub.name} is already canceled — access ends ${sub.renews}.`;
+      } else {
+        cancelSub(sub);
+        toast(`${sub.name} deactivated · +${fmt2(sub.cost)}/mo to car fund`);
+        reply = `Done — canceled <strong>${sub.name}</strong>, that’s ${fmt2(sub.cost)}/mo back. Routed to your car fund — new ETA <strong>${carEta()}</strong>. You keep access until ${sub.renews}.`;
+      }
+    } else {
+      sub.kept = true;
+      reply = `Got it — keeping <strong>${sub.name}</strong>. I’ll stop asking about it.`;
+    }
+  } else {
+    const f = flaggedSubs();
+    reply = `I can take action right from this thread: reply <strong>CANCEL &lt;name&gt;</strong> to end a subscription or <strong>KEEP &lt;name&gt;</strong> to stop suggestions.${f.length?` Right now I’d look at ${f.map(s=>s.name).join(' and ')}.`:''}`;
+  }
+  state.thread.push({who:'agent', text:reply});
+  render();
+  const again = document.getElementById('smsInput');
+  if(again) again.focus();
 }
 
 /* ============ SMS text generation ============ */
@@ -549,12 +605,18 @@ function pageReport(){
 
     <div class="phone"><div class="screen">
       <div class="ph-top"><div class="notch"></div><div class="ph-name">Sentinel</div><div class="ph-num">+1 (833) 555-0199</div></div>
-      <div class="msgs">
+      <div class="msgs" id="msgs">
         <div class="stamp">Today ${state.reportTime}</div>
         ${state.smsOn?`<div class="bubble">${smsBody().replace(/^Good morning/,'<span class="b-brand">sentinel.money</span>\nGood morning')}</div>
         <div class="bubble me">how much of that is doordash?</div>
-        <div class="bubble">DoorDash is $85.00 of your $218 dining spend (3 orders). Cancelling tonight’s usual order keeps you under ${fmt(safeToSpend())} safe-to-spend. Want me to nudge you at 6pm? 👍</div>`
-        :`<div class="bubble">SMS delivery is off — your reports are waiting in the app. Toggle SMS back on anytime.</div>`}
+        <div class="bubble">DoorDash is $85.00 of your $218 dining spend (3 orders). Cancelling tonight’s usual order keeps you under ${fmt(safeToSpend())} safe-to-spend. Want me to nudge you at 6pm? 👍</div>
+        ${flagBubble()}`
+        :`<div class="bubble">SMS delivery is off — your reports are waiting in the app. Toggle SMS back on anytime. You can still reply below.</div>`}
+        ${state.thread.map(m=>`<div class="bubble ${m.who==='me'?'me':''}">${m.text}</div>`).join('')}
+      </div>
+      <div class="compose">
+        <input id="smsInput" placeholder="Text message" autocomplete="off" onkeydown="if(event.key==='Enter')sendSms()">
+        <button class="send" onclick="sendSms()" aria-label="Send">&#8593;</button>
       </div>
     </div></div>
   </div>`;
@@ -616,12 +678,15 @@ function askCancel(id){
       <button class="btn btn-primary btn-sm" onclick="doCancel('${id}')">Deactivate</button>
     </div>`);
 }
-function doCancel(id){
-  const s=state.subs.find(x=>x.id===id);
+function cancelSub(s){
   s.active=false;
   state.savedThisYear += s.cost*12;
   state.goals.carMonthly += Math.round(s.cost);
   state.reportExtras.push(`You canceled <strong>${s.name}</strong> — ${fmt2(s.cost*12)}/yr redirected to your car fund. New ETA: <strong>${carEta()}</strong>.`);
+}
+function doCancel(id){
+  const s=state.subs.find(x=>x.id===id);
+  cancelSub(s);
   closeModal();
   toast(`${s.name} deactivated · +${fmt2(s.cost)}/mo to car fund`);
   render();
@@ -740,6 +805,8 @@ const RENDER={overview:pageOverview,report:pageReport,spending:pageSpending,subs
 function render(){
   renderNav();
   document.getElementById('page').innerHTML = RENDER[state.page]();
+  const msgs=document.getElementById('msgs');
+  if(msgs) msgs.scrollTop=msgs.scrollHeight;
 }
 const h=location.hash.replace('#','');
 if(RENDER[h]) state.page=h;
