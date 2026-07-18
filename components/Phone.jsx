@@ -5,7 +5,7 @@ import { smsBody, flaggedSubs, fmt, fmt2, diningSpent, safeToSpend } from '@/lib
 import { Send } from '@/lib/icons';
 
 export default function Phone() {
-  const { state, sendSms } = useStore();
+  const { state, sendSms, agentThinking } = useStore();
   const [draft, setDraft] = useState('');
   const msgsRef = useRef(null);
 
@@ -55,16 +55,18 @@ export default function Phone() {
           {state.thread.map((m, i) => (
             <div key={i} className={`bubble ${m.who === 'me' ? 'me' : ''}`} dangerouslySetInnerHTML={{ __html: m.text }} />
           ))}
+          {agentThinking && <div className="bubble">Thinking…</div>}
         </div>
         <div className="compose">
           <input
-            placeholder="Text message"
+            placeholder="Ask about your finances"
             autoComplete="off"
             value={draft}
             onChange={e => setDraft(e.target.value)}
             onKeyDown={e => { if (e.key === 'Enter') submit(); }}
+            disabled={agentThinking}
           />
-          <button className="send" onClick={submit} aria-label="Send"><Send /></button>
+          <button className="send" onClick={submit} aria-label="Send" disabled={agentThinking}><Send /></button>
         </div>
       </div>
     </div>

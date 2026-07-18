@@ -1,10 +1,7 @@
 import './globals.css';
-import { DM_Sans } from 'next/font/google';
 import { StoreProvider } from '@/lib/store';
 import Sidebar from '@/components/Sidebar';
 import Toasts from '@/components/Toasts';
-
-const dmSans = DM_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
 export const metadata = {
   title: 'Sentinel | Your finances, reviewed daily',
@@ -14,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={dmSans.className}>
+      <body>
         <StoreProvider>
           <Sidebar />
           <main><div className="col">{children}</div></main>
