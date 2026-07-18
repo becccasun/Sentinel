@@ -256,6 +256,9 @@ h1.page-h{font-size:34px;font-weight:500;letter-spacing:-.8px;margin-bottom:8px}
 .modal h3{font-size:19px;font-weight:600;letter-spacing:-.2px;margin-bottom:10px}
 .modal p{font-size:14px;color:var(--gray-600);line-height:1.6}
 .modal .m-save{margin-top:14px;background:var(--success-25);border:1px solid var(--success-100);border-radius:10px;padding:11px 14px;font-size:13.5px;font-weight:600;color:var(--success-800)}
+.modal .m-warn{display:flex;gap:10px;margin-top:12px;background:var(--warn-25);border:1px solid var(--warn-100);border-radius:10px;padding:11px 14px;font-size:13.5px;color:var(--warn-700);line-height:1.55}
+.modal .m-warn strong{color:var(--warn-800)}
+.modal .m-warn .f-ic{flex:0 0 16px;margin-top:2px}
 .modal .m-foot{border-top:1px solid var(--gray-200);padding:15px 30px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
 
 /* toast */
@@ -353,7 +356,9 @@ const state = {
     carTarget:9000, carSaved:5400, carMonthly:450,
     efTarget:8000, efSaved:6150,
     diningBudget:150, subCap:120, safeTarget:500,
+    aiCap:30, // max single-theme portfolio exposure, %
   },
+  portfolio:{ weekChange:320, weekPct:2.8, drivers:'NVDA and VOO', aiExposure:41 },
   savedThisYear:0,
   reportExtras:[],
   thread:[], // user replies + agent responses in the SMS thread: {who:'me'|'agent', text}
@@ -480,36 +485,94 @@ function sendSms(){
   if(again) again.focus();
 }
 
+/* ============ report generation ============ */
+/* % over(+)/under(-) the dining budget — computed, never hardcoded */
+function diningDeltaPct(){ return Math.round((diningSpent - state.goals.diningBudget) / state.goals.diningBudget * 100); }
+
+/* Single source of truth for the daily report. Both the on-screen report card
+   and the SMS bubble render from this, so they can never disagree.
+   Each finding: {ic: IC key, text: rich HTML line, sms: concise plain line (null = omit from SMS)} */
+function buildReport(){
+  const g=state.goals, p=state.portfolio;
+  const d=diningDeltaPct();
+  const renew=upcomingRenewals();
+  const renewSum=renew.reduce((a,s)=>a+s.cost,0);
+  const efPct=Math.round(g.efSaved/g.efTarget*100);
+
+  const shortTerm=[
+    {ic:d>0?'warn':'check',
+     text:`You spent <strong>${fmt(diningSpent)} on dining this week, ${Math.abs(d)}% ${d>0?'above':'below'}</strong> your ${fmt(g.diningBudget)} budget. Three of five charges were DoorDash.`,
+     sms:`Dining: ${fmt(diningSpent)} this week — ${Math.abs(d)}% ${d>0?'over':'under'} your ${fmt(g.diningBudget)} pace`},
+    {ic:'up',
+     text:`Your Robinhood portfolio is <strong>up ${fmt(p.weekChange)} (${p.weekPct}%)</strong> this week, mostly from ${p.drivers}.`,
+     sms:`Robinhood: +${fmt(p.weekChange)} this week (${p.drivers.replace(' and ',', ')})`},
+    {ic:'cal',
+     text:renew.length? `<strong>${renew.length} subscription${renew.length!==1?'s':''} renew${renew.length===1?'s':''} before Friday</strong> — ${renew.map(s=>`${s.name} (${fmt2(s.cost)})`).join(', ')} — ${fmt2(renewSum)} total.`
+                      : `<strong>No subscriptions renew before Friday.</strong>`,
+     sms:renew.length? `${renew.length} renewal${renew.length>1?'s':''} before Fri: ${renew.map(s=>s.name.split(' ')[0]).join(', ')} (${fmt2(renewSum)})`
+                     : `No renewals before Friday`},
+  ];
+
+  const overAi=p.aiExposure>g.aiCap;
+  const longTerm=[
+    {ic:'check',
+     text:`<strong>Car down payment:</strong> ${fmt(g.carSaved)} of ${fmt(g.carTarget)} saved. At ${fmt(g.carMonthly)}/mo you hit it in <strong>${carMonthsLeft()} month${carMonthsLeft()!==1?'s':''} (${carEta()})</strong>.`,
+     sms:`Car fund: ${fmt(g.carSaved)} / ${fmt(g.carTarget)} — on track for ${carEta()}`},
+    {ic:'check',
+     text:`<strong>Emergency fund:</strong> ${fmt(g.efSaved)} of ${fmt(g.efTarget)} — ${efPct}% funded, earning 4.1% APY.`,
+     sms:null},
+    {ic:overAi?'warn':'check',
+     text:`<strong>Portfolio concentration:</strong> AI holdings are <strong>${p.aiExposure}%</strong> of your portfolio${overAi?` — above your ${g.aiCap}% guardrail. That’s a drift from your own rule, not advice`:` — inside your ${g.aiCap}% guardrail`}.`,
+     sms:null},
+  ];
+
+  const overage=Math.max(0, diningSpent - g.diningBudget);
+  let action;
+  if(overage>0){
+    const weeks=Math.max(1, Math.round(overage/Math.max(1,g.carMonthly)*4.33));
+    const wk=weeks===1?'about a week':`about ${weeks} weeks`;
+    action={
+      html:`<strong>Skip delivery twice this week</strong> and move ${fmt(overage)} to your car fund — that clears the dining overage and pulls your <strong>${carEta()}</strong> goal ${wk} closer. Safe to spend before Friday: <strong>${fmt(safeToSpend())}</strong>.`,
+      sms:`Do this: skip delivery twice and move ${fmt(overage)} to your car fund — pulls ${carEta()} ${wk} closer.`
+    };
+  } else {
+    action={
+      html:`Dining is inside budget — nothing to fix. You can safely spend <strong>${fmt(safeToSpend())}</strong> before Friday, or sweep the surplus into your car fund to beat <strong>${carEta()}</strong>.`,
+      sms:`You’re inside budget — safe to spend ${fmt(safeToSpend())} before Friday, or sweep the surplus to your car fund.`
+    };
+  }
+
+  return {shortTerm, longTerm, action};
+}
+
 /* ============ SMS text generation ============ */
 function smsBody(){
-  const renew = upcomingRenewals();
-  const lines=[
+  const r=buildReport();
+  return [
     `Good morning, Alex ☀️ Here’s your daily brief:`,
     ``,
-    `• Dining: ${fmt(diningSpent)} this week — 43% over your ${fmt(state.goals.diningBudget)} pace`,
-    `• Robinhood: +$320 this week (NVDA, VOO)`,
-    renew.length? `• ${renew.length} renewal${renew.length>1?'s':''} before Fri: ${renew.map(s=>s.name.split(' ')[0]).join(', ')} (${fmt2(renew.reduce((a,s)=>a+s.cost,0))})` : `• No renewals before Friday`,
-    `• Car fund: ${fmt(state.goals.carSaved)} / ${fmt(state.goals.carTarget)} — on track for ${carEta()}`,
+    ...r.shortTerm.map(f=>'• '+f.sms),
+    ...state.reportExtras.map(e=>'• '+e.replace(/<[^>]+>/g,'')),
+    ...r.longTerm.filter(f=>f.sms).map(f=>'• '+f.sms),
     ``,
     `Safe to spend before Friday: ${fmt(safeToSpend())}`,
-    `Do this: skip delivery twice this week and move $75 to your car fund.`,
-  ];
-  if(state.reportExtras.length) lines.splice(6,0,...state.reportExtras.map(e=>'• '+e.replace(/<[^>]+>/g,'')));
-  return lines.join('\n');
+    r.action.sms,
+  ].join('\n');
 }
 
 /* ============ pages ============ */
 function pageOverview(){
-  const renew=upcomingRenewals();
+  const r=buildReport();
+  const d=diningDeltaPct();
   return `
   <h1 class="page-h">Morning, Alex.</h1>
-  <p class="page-sub">Everything looks stable. One thing needs your attention: dining is pacing <strong>43% above budget</strong> this week.</p>
+  <p class="page-sub">${d>0?`Everything looks stable. One thing needs your attention: dining is pacing <strong>${d}% above budget</strong> this week.`:`All clear — every budget is on pace this week.`}</p>
 
   <div class="statgrid">
     <div class="statcard solar"><div class="sl">Safe to spend before Friday</div><div class="sv">${fmt(safeToSpend())}</div><div class="sd">After budgets, renewals & goals</div></div>
     <div class="statcard"><div class="sl">Total cash</div><div class="sv">${fmt(cash())}</div><div class="sd up">Across 2 accounts</div></div>
     <div class="statcard"><div class="sl">Card balances</div><div class="sv">${fmt(cardDebt())}</div><div class="sd">Autopay Jul 28</div></div>
-    <div class="statcard"><div class="sl">Investments</div><div class="sv">${fmt(12600)}</div><div class="sd up">+$320 (2.8%) this week</div></div>
+    <div class="statcard"><div class="sl">Investments</div><div class="sv">${fmt(state.accounts.find(a=>a.id==='rh').bal)}</div><div class="sd up">+${fmt(state.portfolio.weekChange)} (${state.portfolio.weekPct}%) this week</div></div>
     <div class="statcard"><div class="sl">Subscriptions</div><div class="sv">${fmt2(subTotal())}<span style="font-size:14px;color:var(--gray-500)">/mo</span></div><div class="sd ${subTotal()>state.goals.subCap?'warn':''}">${subTotal()>state.goals.subCap?'Over your '+fmt(state.goals.subCap)+' cap':'Under your '+fmt(state.goals.subCap)+' cap'}</div></div>
     <div class="statcard dark"><div class="sl">Agent status</div><div class="sv" style="font-size:19px">Watch mode</div><div class="sd">Next report tomorrow, ${state.reportTime}</div></div>
   </div>
@@ -517,9 +580,8 @@ function pageOverview(){
   <div class="panel">
     <div class="p-head"><h3>Today’s findings</h3><button class="see" onclick="go('report')">Open daily report</button></div>
     <div class="p-pad" style="padding-top:12px">
-      <div class="finding"><span class="f-ic">${IC.warn}</span><span><strong>Dining is your only red flag.</strong> ${fmt(diningSpent)} this week vs a ${fmt(state.goals.diningBudget)} budget — mostly DoorDash (3 orders).</span></div>
-      <div class="finding"><span class="f-ic">${IC.up}</span><span><strong>Portfolio up $320 this week,</strong> driven by NVDA and VOO. AI exposure is 41% — above your 30% guardrail.</span></div>
-      <div class="finding"><span class="f-ic">${IC.cal}</span><span><strong>${renew.length} subscription${renew.length!==1?'s':''} renew${renew.length===1?'s':''} before Friday</strong>${renew.length?': '+renew.map(s=>s.name).join(', ')+'.':'.'} ${state.subs.find(s=>s.id==='peacock'&&s.active)?'Peacock hasn’t been opened in 47 days.':''}</span></div>
+      ${r.shortTerm.map(f=>`<div class="finding"><span class="f-ic">${IC[f.ic]}</span><span>${f.text}</span></div>`).join('')}
+      ${flaggedSubs().length?`<div class="finding"><span class="f-ic">${IC.warn}</span><span><strong>${flaggedSubs().map(s=>s.name).join(' and ')}</strong> look${flaggedSubs().length===1?'s':''} unused — flagged in today’s report.</span></div>`:''}
     </div>
   </div>
 
@@ -556,7 +618,8 @@ function catBar(c){
 }
 
 function pageReport(){
-  const renew=upcomingRenewals();
+  const r=buildReport();
+  const finding=f=>`<div class="finding"><span class="f-ic">${IC[f.ic]}</span><span>${f.text}</span></div>`;
   return `
   <h1 class="page-h">Daily report</h1>
   <p class="page-sub">Sentinel reviews all five connected platforms every morning and texts you what changed, what matters, and what to do next.</p>
@@ -570,20 +633,17 @@ function pageReport(){
           <span class="r-badge">Today</span>
         </div>
         <div class="r-sec">
-          <div class="r-k">Since yesterday</div>
-          <div class="finding"><span class="f-ic">${IC.warn}</span><span>You spent <strong>$218 on dining this week, 43% above</strong> your normal pace. Three of five charges were DoorDash.</span></div>
-          <div class="finding"><span class="f-ic">${IC.up}</span><span>Your Robinhood portfolio is <strong>up $320</strong>, mostly from NVDA and VOO. AI exposure is now <strong>41%</strong> — above your 30% target.</span></div>
-          <div class="finding"><span class="f-ic">${IC.cal}</span><span><strong>${renew.length} subscription${renew.length!==1?'s':''} renew before Friday</strong>${renew.length?' — '+renew.map(s=>s.name+' ('+fmt2(s.cost)+')').join(', ')+'.':'.'}</span></div>
+          <div class="r-k">Short-term · since yesterday</div>
+          ${r.shortTerm.map(finding).join('')}
           ${state.reportExtras.map(e=>`<div class="finding"><span class="f-ic">${IC.check}</span><span>${e}</span></div>`).join('')}
         </div>
         <div class="r-sec">
-          <div class="r-k">Long-term goals</div>
-          <div class="finding"><span class="f-ic">${IC.check}</span><span><strong>Car down payment:</strong> ${fmt(state.goals.carSaved)} of ${fmt(state.goals.carTarget)} saved. At ${fmt(state.goals.carMonthly)}/mo you hit it in <strong>${carMonthsLeft()} months (${carEta()})</strong>.</span></div>
-          <div class="finding"><span class="f-ic">${IC.check}</span><span><strong>Emergency fund:</strong> ${fmt(state.goals.efSaved)} of ${fmt(state.goals.efTarget)} — ${Math.round(state.goals.efSaved/state.goals.efTarget*100)}% there, earning 4.1% APY.</span></div>
+          <div class="r-k">Long-term · goals & guardrails</div>
+          ${r.longTerm.map(finding).join('')}
         </div>
         <div class="r-sec">
           <div class="r-k">Recommended action</div>
-          <div class="action-box"><span class="f-ic">${IC.bolt}</span><span><strong>Skip delivery twice this week</strong> and move $75 to your car fund. That keeps dining inside budget and pulls your ${carEta()} goal a week closer. Safe to spend before Friday: <strong>${fmt(safeToSpend())}</strong>.</span></div>
+          <div class="action-box"><span class="f-ic">${IC.bolt}</span><span>${r.action.html}</span></div>
         </div>
       </div>
 
@@ -609,7 +669,7 @@ function pageReport(){
         <div class="stamp">Today ${state.reportTime}</div>
         ${state.smsOn?`<div class="bubble">${smsBody().replace(/^Good morning/,'<span class="b-brand">sentinel.money</span>\nGood morning')}</div>
         <div class="bubble me">how much of that is doordash?</div>
-        <div class="bubble">DoorDash is $85.00 of your $218 dining spend (3 orders). Cancelling tonight’s usual order keeps you under ${fmt(safeToSpend())} safe-to-spend. Want me to nudge you at 6pm? 👍</div>
+        <div class="bubble">DoorDash is $85.00 of your ${fmt(diningSpent)} dining spend (3 orders). Cancelling tonight’s usual order keeps you under ${fmt(safeToSpend())} safe-to-spend. Want me to nudge you at 6pm? 👍</div>
         ${flagBubble()}`
         :`<div class="bubble">SMS delivery is off — your reports are waiting in the app. Toggle SMS back on anytime. You can still reply below.</div>`}
         ${state.thread.map(m=>`<div class="bubble ${m.who==='me'?'me':''}">${m.text}</div>`).join('')}
@@ -671,11 +731,12 @@ function askCancel(id){
     <div class="m-body">
       <h3>Deactivate ${s.name}?</h3>
       <p>You’ve used it ${s.usage<10?'zero times':'only '+s.opens.toLowerCase()} recently (last opened ${s.lastUsed.toLowerCase()}). You’ll keep access until <strong>${s.renews}</strong>, then billing stops.</p>
+      <div class="m-warn"><span class="f-ic">${IC.warn}</span><span><strong>This isn’t easily reversible.</strong> Deactivating cancels your plan with the provider — getting it back usually means re-subscribing from scratch, and any grandfathered pricing is lost. Only continue if you’re sure.</span></div>
       <div class="m-save">Saves ${fmt2(s.cost)}/mo — ${fmt2(s.cost*12)}/yr → auto-redirected to your car fund</div>
     </div>
     <div class="m-foot">
       <button class="btn btn-secondary btn-sm" onclick="closeModal()">Keep it</button>
-      <button class="btn btn-primary btn-sm" onclick="doCancel('${id}')">Deactivate</button>
+      <button class="btn btn-primary btn-sm" onclick="doCancel('${id}')">I’m sure — deactivate</button>
     </div>`);
 }
 function cancelSub(s){
@@ -750,7 +811,7 @@ function pageGoals(){
 
   <div class="pagebody"><h2>Portfolio guardrail</h2></div>
   <div class="panel" style="margin-top:0"><div class="p-pad">
-    <div class="finding" style="padding:0"><span class="f-ic">${IC.warn}</span><span><strong>Max single-theme exposure: 30%.</strong> AI holdings (NVDA + related) are at <strong>41%</strong> of your portfolio. The agent will keep flagging this in your report — it never gives buy/sell advice, it just tells you when you’ve drifted from your own rule.</span></div>
+    <div class="finding" style="padding:0"><span class="f-ic">${IC.warn}</span><span><strong>Max single-theme exposure: ${g.aiCap}%.</strong> AI holdings (NVDA + related) are at <strong>${state.portfolio.aiExposure}%</strong> of your portfolio. The agent will keep flagging this in your report — it never gives buy/sell advice, it just tells you when you’ve drifted from your own rule.</span></div>
   </div></div>`;
 }
 function setCar(v){ state.goals.carMonthly=+v; render(); }
