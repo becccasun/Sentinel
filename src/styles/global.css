@@ -1,0 +1,119 @@
+@import "./tokens.css";
+@import "./components.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* All numerics use tabular figures. */
+.tnum,
+.money {
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* App layout: centered ~960px column. */
+.app {
+  min-height: 100vh;
+}
+
+.column {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--s8) var(--s6) 120px;
+}
+
+/* View switcher (dev/demo affordance) lives in a thin top bar. */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 var(--s6);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar__brand {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semi);
+  letter-spacing: -0.01em;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: var(--s1);
+}
+
+.topbar__tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-faint);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-med);
+  padding: var(--s1) var(--s3);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.topbar__tab:hover {
+  color: var(--text-muted);
+  background: var(--bg);
+}
+
+.topbar__tab--active {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.topbar__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  color: var(--surface);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-med);
+}

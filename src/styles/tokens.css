@@ -1,0 +1,42 @@
+:root {
+  /* surfaces */
+  --bg:            #FAF9F5;   /* warm off-white app background */
+  --surface:       #FFFFFF;   /* cards, tables */
+  --border:        #E7E4DC;   /* hairline borders, 1px */
+  --border-strong: #D6D2C7;
+
+  /* text */
+  --text:          #1A1A17;   /* near-black */
+  --text-muted:    #6B685F;   /* secondary, reasoning lines */
+  --text-faint:    #9B978C;   /* timestamps, meta */
+
+  /* accent — USE SPARINGLY: confirm button bg + tiny chips only */
+  --accent:        #F5FF78;   /* acid yellow */
+  --accent-ink:    #1A1A17;   /* text on accent */
+
+  /* status — muted, text/border tints only, never large fills */
+  --approve:       #1E7F4F;   /* green */
+  --approve-bg:    #EAF3EE;
+  --reject:        #B3402A;   /* red */
+  --reject-bg:     #F7ECE9;
+  --flag:          #A16D1E;   /* amber */
+  --flag-bg:       #F6EFE1;
+
+  /* type */
+  --font: "Inter", -apple-system, system-ui, sans-serif;
+  --fs-hero: 28px; --fs-lg: 20px; --fs-md: 15px; --fs-body: 14px; --fs-sm: 13px; --fs-xs: 12px;
+  --fw-reg: 400; --fw-med: 500; --fw-semi: 600;
+
+  /* space scale (px): 4 8 12 16 24 32 */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px;
+
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+
+  /* footer — Ramp-style inverted band; warm near-black, never pure #000 */
+  --footer-bg:       #0F0F0D;
+  --footer-text:     #F4F3EE;   /* column titles, emphasized text */
+  --footer-link:     #A6A39A;   /* nav links */
+  --footer-faint:    #75726A;   /* fine print, legal */
+  --footer-hairline: rgba(244, 243, 238, 0.16);
+}
