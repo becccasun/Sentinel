@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { getBills, saveVerdict, getVerdictCounts } from './data/data.js'
+import { getBills, saveVerdict } from './data/data.js'
 import Review from './views/Review.jsx'
 import Graduation from './views/Graduation.jsx'
 import Live from './views/Live.jsx'
-
-const VIEWS = ['review', 'graduation', 'live']
+import './styles.css'
 
 export default function App() {
   const [view, setView] = useState('review')
@@ -14,35 +13,34 @@ export default function App() {
     setBills((prev) => saveVerdict(prev, billId, verdict))
   }
 
-  const counts = getVerdictCounts(bills)
+  const disagreements = bills.filter((bill) =>
+    !((bill.human_decision === 'approved' && bill.agent_proposal === 'approve') ||
+      (bill.human_decision === 'rejected' && bill.agent_proposal === 'reject'))
+  )
+  const reviewedDisagreements = disagreements.filter((bill) => bill.verdict !== null).length
 
   return (
-    <div>
-      <nav style={{ display: 'flex', gap: 8, padding: 12 }}>
-        {VIEWS.map((v) => (
-          <button
-            key={v}
-            onClick={() => setView(v)}
-            style={{ fontWeight: view === v ? 'bold' : 'normal' }}
-          >
-            {v}
-          </button>
-        ))}
-      </nav>
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="brand"><span className="brand-mark">R</span> Ramp</div>
+        <div className="mode-pill"><span className="status-dot" /> AP Agent · probation</div>
+      </header>
 
       {view === 'review' && (
-        <Review bills={bills} onVerdict={handleVerdict} counts={counts} />
+        <Review
+          bills={bills}
+          onVerdict={handleVerdict}
+          reviewed={reviewedDisagreements}
+          totalToReview={disagreements.length}
+          onContinue={() => setView('graduation')}
+        />
       )}
       {view === 'graduation' && (
-        <Graduation bills={bills} counts={counts} />
+        <Graduation bills={bills} onConfirm={() => setView('live')} />
       )}
       {view === 'live' && (
-        <Live bills={bills} counts={counts} />
+        <Live />
       )}
-
-      <footer style={{ padding: 12, borderTop: '1px solid #ccc' }}>
-        {counts.reviewed} of {counts.total} reviewed — {counts.remaining} remaining
-      </footer>
     </div>
   )
 }
