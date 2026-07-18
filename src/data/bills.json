@@ -1,0 +1,2002 @@
+[
+  {
+    "bill_id": "BILL-098",
+    "vendor": "Notion",
+    "amount": 43.2,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Workspace seats match approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-016",
+    "vendor": "AWS",
+    "amount": 197.2,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-128",
+    "vendor": "FedEx Shipping",
+    "amount": 1945.3,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Standard shipping charge — amount within normal range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-068",
+    "vendor": "Notion",
+    "amount": 714.1,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-066",
+    "vendor": "GitHub",
+    "amount": 694.7,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-168",
+    "vendor": "Notion",
+    "amount": 6361.7,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-113",
+    "vendor": "Notion",
+    "amount": 757.1,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan renewal — below $300 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-103",
+    "vendor": "FedEx Shipping",
+    "amount": 234.7,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Standard shipping charge — amount within normal range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-099",
+    "vendor": "Gusto",
+    "amount": 76.9,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payroll processing fee — matches employee count on file.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-144",
+    "vendor": "Staples Business",
+    "amount": 3690.8,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Office supply restock — under $500 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-127",
+    "vendor": "Salesforce",
+    "amount": 1867.9,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual contract monthly installment — on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-031",
+    "vendor": "AWS",
+    "amount": 348.1,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-042",
+    "vendor": "Salesforce",
+    "amount": 456.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Cloud seat license matches headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-130",
+    "vendor": "Stripe",
+    "amount": 2134.8,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly processing charge within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-140",
+    "vendor": "DocuSign",
+    "amount": 3245.7,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-013",
+    "vendor": "FedEx Shipping",
+    "amount": 167.3,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Freight charge consistent with order volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-034",
+    "vendor": "Slack Technologies",
+    "amount": 374.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Quarterly true-up within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-048",
+    "vendor": "Google Workspace",
+    "amount": 515.7,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly seat license — 40 active seats verified in admin console.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-087",
+    "vendor": "Salesforce",
+    "amount": 903.8,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sandbox add-on within approved budget.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-025",
+    "vendor": "DocuSign",
+    "amount": 285.1,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-038",
+    "vendor": "Notion",
+    "amount": 415.7,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-179",
+    "vendor": "Slack Technologies",
+    "amount": 7585.8,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Quarterly true-up within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-057",
+    "vendor": "Salesforce",
+    "amount": 604.7,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual contract monthly installment — on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-074",
+    "vendor": "Staples Business",
+    "amount": 778.3,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-030",
+    "vendor": "Stripe",
+    "amount": 337.4,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly processing charge within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-132",
+    "vendor": "Microsoft Azure",
+    "amount": 2356.4,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Blob storage charge consistent with data ingestion volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-047",
+    "vendor": "Microsoft Azure",
+    "amount": 503.4,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Blob storage charge consistent with data ingestion volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-151",
+    "vendor": "GitHub",
+    "amount": 4469.8,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Actions compute charge within expected CI usage.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-136",
+    "vendor": "GitHub",
+    "amount": 2801.5,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan seats — matches current engineering headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-054",
+    "vendor": "Gusto",
+    "amount": 574.9,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-160",
+    "vendor": "Stripe",
+    "amount": 5471.4,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Platform fee consistent with reported revenue.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-019",
+    "vendor": "Slack Technologies",
+    "amount": 226.1,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Pro plan — 30 seats at contract rate, matches prior invoice.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-060",
+    "vendor": "Stripe",
+    "amount": 637.8,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly processing charge within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-143",
+    "vendor": "FedEx Shipping",
+    "amount": 3579.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-149",
+    "vendor": "Slack Technologies",
+    "amount": 4247.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-020",
+    "vendor": "Zoom Communications",
+    "amount": 235.6,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Webinar add-on within approved budget line.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-011",
+    "vendor": "HubSpot",
+    "amount": 145.2,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "CRM seat license renewal at contracted rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-028",
+    "vendor": "FedEx Shipping",
+    "amount": 314.2,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-012",
+    "vendor": "Salesforce",
+    "amount": 158.8,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sandbox add-on within approved budget.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-182",
+    "vendor": "Figma",
+    "amount": 11450,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual plan proration for new seat within policy.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-122",
+    "vendor": "Figma",
+    "amount": 1467.3,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Organization plan renewal at contract rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-184",
+    "vendor": "Gusto",
+    "amount": 13200,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payroll processing fee — matches employee count on file.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-156",
+    "vendor": "HubSpot",
+    "amount": 5026.2,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Marketing Hub monthly charge matches order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-114",
+    "vendor": "Gusto",
+    "amount": 812.7,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-123",
+    "vendor": "Notion",
+    "amount": 1545.7,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan renewal — below $300 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-050",
+    "vendor": "Zoom Communications",
+    "amount": 537.1,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Business plan renewal — matches prior quarter.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-154",
+    "vendor": "Gusto",
+    "amount": 4803.7,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-003",
+    "vendor": "Google Workspace",
+    "amount": 67.4,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-110",
+    "vendor": "Zoom Communications",
+    "amount": 589.3,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Webinar add-on within approved budget line.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-161",
+    "vendor": "AWS",
+    "amount": 5582.7,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Reserved instance charge matches signed contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-186",
+    "vendor": "HubSpot",
+    "amount": 15600,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "CRM seat license renewal at contracted rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-064",
+    "vendor": "Slack Technologies",
+    "amount": 679.6,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-173",
+    "vendor": "FedEx Shipping",
+    "amount": 6918.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Freight charge consistent with order volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-117",
+    "vendor": "Microsoft Azure",
+    "amount": 1098.2,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Compute reservation matches PO-2026-0041.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-158",
+    "vendor": "FedEx Shipping",
+    "amount": 5248.8,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-118",
+    "vendor": "Google Workspace",
+    "amount": 1156.8,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-131",
+    "vendor": "AWS",
+    "amount": 2245.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-001",
+    "vendor": "AWS",
+    "amount": 42.8,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-137",
+    "vendor": "Figma",
+    "amount": 2912.8,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual plan proration for new seat within policy.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-139",
+    "vendor": "Gusto",
+    "amount": 3134.4,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-071",
+    "vendor": "HubSpot",
+    "amount": 747.2,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "CRM seat license renewal at contracted rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-078",
+    "vendor": "Google Workspace",
+    "amount": 814.8,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly seat license — 40 active seats verified in admin console.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-148",
+    "vendor": "Google Workspace",
+    "amount": 4135.9,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-002",
+    "vendor": "Microsoft Azure",
+    "amount": 55.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Blob storage charge consistent with data ingestion volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-126",
+    "vendor": "HubSpot",
+    "amount": 1789.4,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Pro seats — matches current sales headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-152",
+    "vendor": "Figma",
+    "amount": 4581.1,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Organization plan renewal at contract rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-091",
+    "vendor": "AWS",
+    "amount": 945.6,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Cloud compute cost consistent with projected growth trajectory.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-085",
+    "vendor": "DocuSign",
+    "amount": 889.4,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-096",
+    "vendor": "GitHub",
+    "amount": 989.8,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Actions compute charge within expected CI usage.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-169",
+    "vendor": "Gusto",
+    "amount": 6472.9,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Benefits administration fee — expected and on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-157",
+    "vendor": "Salesforce",
+    "amount": 5137.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Cloud seat license matches headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-009",
+    "vendor": "Gusto",
+    "amount": 128.4,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-183",
+    "vendor": "Notion",
+    "amount": 12340,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-076",
+    "vendor": "AWS",
+    "amount": 797.4,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Reserved instance charge matches signed contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-185",
+    "vendor": "DocuSign",
+    "amount": 14100,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-018",
+    "vendor": "Google Workspace",
+    "amount": 214.8,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly seat license — 40 active seats verified in admin console.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-051",
+    "vendor": "GitHub",
+    "amount": 548.8,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan seats — matches current engineering headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-017",
+    "vendor": "Microsoft Azure",
+    "amount": 203.5,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Azure DevOps monthly fee — matches prior month within 2%.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-022",
+    "vendor": "Figma",
+    "amount": 253.2,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual plan proration for new seat within policy.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-147",
+    "vendor": "Microsoft Azure",
+    "amount": 4024.7,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Compute reservation matches PO-2026-0041.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-088",
+    "vendor": "FedEx Shipping",
+    "amount": 914.5,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-041",
+    "vendor": "HubSpot",
+    "amount": 444.8,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Marketing Hub monthly charge matches order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-052",
+    "vendor": "Figma",
+    "amount": 559.5,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Design seat license — matches approved seat roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-142",
+    "vendor": "Salesforce",
+    "amount": 3468.2,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Cloud seat license matches headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-174",
+    "vendor": "Staples Business",
+    "amount": 7029.4,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Supply order within monthly office budget.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-021",
+    "vendor": "GitHub",
+    "amount": 241.9,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Actions compute charge within expected CI usage.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-163",
+    "vendor": "Google Workspace",
+    "amount": 5805.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Workspace renewal matches annual contract proration.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-119",
+    "vendor": "Slack Technologies",
+    "amount": 1234.6,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Pro plan — 30 seats at contract rate, matches prior invoice.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-167",
+    "vendor": "Figma",
+    "amount": 6250.4,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual plan proration for new seat within policy.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-023",
+    "vendor": "Notion",
+    "amount": 264.7,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-027",
+    "vendor": "Salesforce",
+    "amount": 302.5,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sandbox add-on within approved budget.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-006",
+    "vendor": "GitHub",
+    "amount": 94.3,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan seats — matches current engineering headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-045",
+    "vendor": "Stripe",
+    "amount": 489.6,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly processing charge within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-014",
+    "vendor": "Staples Business",
+    "amount": 179.6,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-081",
+    "vendor": "GitHub",
+    "amount": 847.9,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-072",
+    "vendor": "Salesforce",
+    "amount": 758.9,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Cloud seat license matches headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-090",
+    "vendor": "Stripe",
+    "amount": 936.9,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payment processing fees match transaction volume for period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-181",
+    "vendor": "GitHub",
+    "amount": 10890,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-093",
+    "vendor": "Google Workspace",
+    "amount": 963.7,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-138",
+    "vendor": "Notion",
+    "amount": 3023.1,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan renewal — below $300 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-032",
+    "vendor": "Microsoft Azure",
+    "amount": 359.8,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Azure DevOps monthly fee — matches prior month within 2%.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-039",
+    "vendor": "Gusto",
+    "amount": 427.4,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-083",
+    "vendor": "Notion",
+    "amount": 867.3,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Workspace seats match approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-108",
+    "vendor": "Google Workspace",
+    "amount": 478.1,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Workspace renewal matches annual contract proration.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-035",
+    "vendor": "Zoom Communications",
+    "amount": 385.9,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Webinar add-on within approved budget line.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-043",
+    "vendor": "FedEx Shipping",
+    "amount": 467.2,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-104",
+    "vendor": "Staples Business",
+    "amount": 278.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-107",
+    "vendor": "Microsoft Azure",
+    "amount": 423.5,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Compute reservation matches PO-2026-0041.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-155",
+    "vendor": "DocuSign",
+    "amount": 4914.9,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-159",
+    "vendor": "Staples Business",
+    "amount": 5360.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Office supply restock — under $500 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-141",
+    "vendor": "HubSpot",
+    "amount": 3356.9,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Pro seats — matches current sales headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-109",
+    "vendor": "Slack Technologies",
+    "amount": 534.7,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-092",
+    "vendor": "Microsoft Azure",
+    "amount": 954.3,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Compute reservation matches PO-2026-0041.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-089",
+    "vendor": "Staples Business",
+    "amount": 925.2,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Supply order within monthly office budget.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-178",
+    "vendor": "Google Workspace",
+    "amount": 7474.5,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-150",
+    "vendor": "Zoom Communications",
+    "amount": 4358.5,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with headcount and prior billing.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-069",
+    "vendor": "Gusto",
+    "amount": 725.8,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Benefits administration fee — expected and on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-162",
+    "vendor": "Microsoft Azure",
+    "amount": 5693.9,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Azure DevOps monthly fee — matches prior month within 2%.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-165",
+    "vendor": "Zoom Communications",
+    "amount": 6027.8,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Business plan renewal — matches prior quarter.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-049",
+    "vendor": "Slack Technologies",
+    "amount": 526.4,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-067",
+    "vendor": "Figma",
+    "amount": 703.4,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Design seat license — matches approved seat roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-059",
+    "vendor": "Staples Business",
+    "amount": 626.1,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Office supply restock — under $500 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-005",
+    "vendor": "Zoom Communications",
+    "amount": 89.5,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with headcount and prior billing.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-134",
+    "vendor": "Slack Technologies",
+    "amount": 2578.9,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-111",
+    "vendor": "GitHub",
+    "amount": 645.9,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan seats — matches current engineering headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-061",
+    "vendor": "AWS",
+    "amount": 648.5,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Cloud compute cost consistent with projected growth trajectory.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-166",
+    "vendor": "GitHub",
+    "amount": 6139.1,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-124",
+    "vendor": "Gusto",
+    "amount": 1623.1,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "HR platform monthly charge within contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-115",
+    "vendor": "DocuSign",
+    "amount": 868.3,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-044",
+    "vendor": "Staples Business",
+    "amount": 478.9,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-116",
+    "vendor": "AWS",
+    "amount": 1024.5,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Reserved instance charge matches signed contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-180",
+    "vendor": "Zoom Communications",
+    "amount": 10120,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Business plan renewal — matches prior quarter.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-063",
+    "vendor": "Google Workspace",
+    "amount": 668.9,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Per-seat rate matches signed order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-004",
+    "vendor": "Slack Technologies",
+    "amount": 78.2,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Pro plan — 30 seats at contract rate, matches prior invoice.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-084",
+    "vendor": "Gusto",
+    "amount": 878.7,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Benefits administration fee — expected and on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-036",
+    "vendor": "GitHub",
+    "amount": 394.6,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-101",
+    "vendor": "HubSpot",
+    "amount": 156.8,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Marketing Hub monthly charge matches order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-153",
+    "vendor": "Notion",
+    "amount": 4692.4,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Team plan renewal — below $300 single-purchase threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-077",
+    "vendor": "Microsoft Azure",
+    "amount": 803.1,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Blob storage charge consistent with data ingestion volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-170",
+    "vendor": "DocuSign",
+    "amount": 6584.2,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-120",
+    "vendor": "Zoom Communications",
+    "amount": 1312.4,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with headcount and prior billing.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-121",
+    "vendor": "GitHub",
+    "amount": 1389.9,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly developer seat license matches approved roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-055",
+    "vendor": "DocuSign",
+    "amount": 585.6,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-053",
+    "vendor": "Notion",
+    "amount": 568.2,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly fee consistent with prior invoices.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-073",
+    "vendor": "FedEx Shipping",
+    "amount": 767.6,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Express courier matches shipping manifest for this period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-056",
+    "vendor": "HubSpot",
+    "amount": 596.3,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Pro seats — matches current sales headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-095",
+    "vendor": "Zoom Communications",
+    "amount": 981.1,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Webinar add-on within approved budget line.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-007",
+    "vendor": "Figma",
+    "amount": 102.6,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual plan proration for new seat within policy.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-172",
+    "vendor": "Salesforce",
+    "amount": 6806.8,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Sales Cloud seat license matches headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-145",
+    "vendor": "Stripe",
+    "amount": 3802.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payment processing fees match transaction volume for period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-175",
+    "vendor": "Stripe",
+    "amount": 7140.7,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Platform fee consistent with reported revenue.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-070",
+    "vendor": "DocuSign",
+    "amount": 736.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-008",
+    "vendor": "Notion",
+    "amount": 115.9,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Workspace seats match approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-187",
+    "vendor": "Salesforce",
+    "amount": 16800,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual contract monthly installment — on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-125",
+    "vendor": "DocuSign",
+    "amount": 1701.8,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-024",
+    "vendor": "Gusto",
+    "amount": 276.4,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payroll processing fee — matches employee count on file.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-106",
+    "vendor": "AWS",
+    "amount": 367.9,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-100",
+    "vendor": "DocuSign",
+    "amount": 112.3,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-010",
+    "vendor": "DocuSign",
+    "amount": 134.7,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Envelope volume within monthly plan allowance.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-082",
+    "vendor": "Figma",
+    "amount": 856.6,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Design seat license — matches approved seat roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-105",
+    "vendor": "Stripe",
+    "amount": 312.6,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly processing charge within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-079",
+    "vendor": "Slack Technologies",
+    "amount": 825.5,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Quarterly true-up within expected range.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-133",
+    "vendor": "Google Workspace",
+    "amount": 2467.7,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly seat license — 40 active seats verified in admin console.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-037",
+    "vendor": "Figma",
+    "amount": 403.3,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Organization plan renewal at contract rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-065",
+    "vendor": "Zoom Communications",
+    "amount": 688.3,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with headcount and prior billing.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-058",
+    "vendor": "FedEx Shipping",
+    "amount": 615.4,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Freight charge consistent with order volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-177",
+    "vendor": "Microsoft Azure",
+    "amount": 7363.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Blob storage charge consistent with data ingestion volume.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-097",
+    "vendor": "Figma",
+    "amount": 994.5,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Design seat license — matches approved seat roster.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-026",
+    "vendor": "HubSpot",
+    "amount": 293.8,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "CRM seat license renewal at contracted rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-129",
+    "vendor": "Staples Business",
+    "amount": 2023.6,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-015",
+    "vendor": "Stripe",
+    "amount": 188.4,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payment processing fees match transaction volume for period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-176",
+    "vendor": "AWS",
+    "amount": 7251.9,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Reserved instance charge matches signed contract terms.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-086",
+    "vendor": "HubSpot",
+    "amount": 897.1,
+    "date": "2026-06-02",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Marketing Hub monthly charge matches order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-164",
+    "vendor": "Slack Technologies",
+    "amount": 5916.5,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-112",
+    "vendor": "Figma",
+    "amount": 701.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Organization plan renewal at contract rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-080",
+    "vendor": "Zoom Communications",
+    "amount": 836.2,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with headcount and prior billing.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-102",
+    "vendor": "Salesforce",
+    "amount": 198.4,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual contract monthly installment — on schedule.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-171",
+    "vendor": "HubSpot",
+    "amount": 6695.5,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Marketing Hub monthly charge matches order form.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-075",
+    "vendor": "Stripe",
+    "amount": 789.7,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Payment processing fees match transaction volume for period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-135",
+    "vendor": "Zoom Communications",
+    "amount": 2690.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Business plan renewal — matches prior quarter.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-062",
+    "vendor": "Microsoft Azure",
+    "amount": 657.2,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Azure DevOps monthly fee — matches prior month within 2%.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-040",
+    "vendor": "DocuSign",
+    "amount": 438.1,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "eSignature plan renewal matches contract.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-046",
+    "vendor": "AWS",
+    "amount": 497.3,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-146",
+    "vendor": "AWS",
+    "amount": 3913.4,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly EC2 + S3 usage — within 4% of prior billing cycle.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-029",
+    "vendor": "Staples Business",
+    "amount": 325.9,
+    "date": "2026-06-01",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Paper and toner order matches approved purchase request.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-094",
+    "vendor": "Slack Technologies",
+    "amount": 972.4,
+    "date": "2026-06-10",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly license consistent with approved headcount.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-033",
+    "vendor": "Google Workspace",
+    "amount": 368.5,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Monthly seat license — 40 active seats verified in admin console.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D01",
+    "vendor": "Acme Facilities Group",
+    "amount": 4120,
+    "date": "2026-06-08",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "Amount and vendor match invoice BILL-D00 paid 6 days ago (2026-06-02, $4,120.00). No intervening PO or contract amendment found. High confidence duplicate — recommend hold pending vendor confirmation.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D02",
+    "vendor": "Salesforce",
+    "amount": 14800,
+    "date": "2026-06-05",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "Amount exceeds $10,000 single-approval threshold. No linked VP sign-off found in approval workflow. Contract on file covers $9,800/quarter — this amount is 51% above contract rate.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D03",
+    "vendor": "Meridian Consulting LLC",
+    "amount": 12500,
+    "date": "2026-06-11",
+    "human_decision": "approved",
+    "agent_proposal": "reject",
+    "agent_reasoning": "Vendor not on approved vendor list. No PO, SOW, or prior payment history found. Consulting category requires pre-approval for amounts over $5,000.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D04",
+    "vendor": "HubSpot",
+    "amount": 12960,
+    "date": "2026-06-13",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "Amount 14× higher than average monthly HubSpot charge observed in shadow window. Flagging as anomalous — no prior invoice at this scale in the 14-day observation period.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D05",
+    "vendor": "AWS",
+    "amount": 3180,
+    "date": "2026-06-12",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "AWS charge is 38% above the prior-month baseline of $2,302. Spike could reflect legitimate workload growth or misconfigured autoscaling. No cost-explorer annotation found.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D06",
+    "vendor": "Retool Inc.",
+    "amount": 1800,
+    "date": "2026-06-03",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "First-time vendor with no prior payment history. No approved vendor record, contract, or PO on file. Recommend confirming vendor onboarding before payment.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D07",
+    "vendor": "FedEx Shipping",
+    "amount": 2410,
+    "date": "2026-06-09",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "FedEx charge is 3.1× the average invoice amount for this vendor ($780). No matching bulk shipment event or freight PO found.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D08",
+    "vendor": "Crestwood Office Interiors",
+    "amount": 1540,
+    "date": "2026-06-07",
+    "human_decision": "approved",
+    "agent_proposal": "reject",
+    "agent_reasoning": "No PO on file. Furniture/fixtures category requires a purchase order for amounts over $500. Vendor is approved but invoice references an internal project code that does not match any open budget line.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D09",
+    "vendor": "TechSolutions Partners",
+    "amount": 2200,
+    "date": "2026-06-06",
+    "human_decision": "approved",
+    "agent_proposal": "flag",
+    "agent_reasoning": "Invoice dated Saturday 2026-06-06 — outside normal business operations. Vendor has no weekend service contract on file. Pattern consistent with backdating.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D10",
+    "vendor": "SkyView Events LLC",
+    "amount": 1125,
+    "date": "2026-06-04",
+    "human_decision": "approved",
+    "agent_proposal": "reject",
+    "agent_reasoning": "Entertainment/events category not in approved spend categories for this cost center. No event memo or manager pre-approval attached.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D11",
+    "vendor": "Notion",
+    "amount": 1320,
+    "date": "2026-06-10",
+    "human_decision": "rejected",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Annual Notion Business plan for 12 seats at $110/seat — within contract terms and below annual renewal threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D12",
+    "vendor": "Zoom Communications",
+    "amount": 1599.9,
+    "date": "2026-06-02",
+    "human_decision": "rejected",
+    "agent_proposal": "approve",
+    "agent_reasoning": "Zoom Business+ upgrade for 15 seats — matches a pending approval request from IT. Per-seat rate is within market range and below the $2,000 auto-escalation threshold.",
+    "verdict": null
+  },
+  {
+    "bill_id": "BILL-D13",
+    "vendor": "Oracle Corporation",
+    "amount": 8500,
+    "date": "2026-06-14",
+    "human_decision": "approved",
+    "agent_proposal": "reject",
+    "agent_reasoning": "Oracle license charge has no matching contract in the vendor management system. No prior Oracle invoices in observation window. Recommend contract verification before payment.",
+    "verdict": null
+  }
+]
